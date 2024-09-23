@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Processamento de Laudos</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        input, button { width: 100%; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Processador de Laudos Médicos</h1>
+        <form id="laudoForm">
+            <input type="file" id="laudo" name="laudo" required />
+            <button type="submit">Processar Laudo</button>
+        </form>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        document.getElementById('laudoForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('laudo', document.getElementById('laudo').files[0]);
+
+            const response = await fetch('/processar', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                document.getElementById('status').innerHTML = `
+                    <a href="/uploads/${result.file}" download>Download Excel Processado</a>
+                `;
+            } else {
+                document.getElementById('status').innerText = 'Erro ao processar o arquivo.';
+            }
+        });
+    </script>
+</body>
+</html>

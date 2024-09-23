@@ -1,0 +1,16 @@
+# Ignorar arquivos de ambiente
+.env
+*.env
+
+# Ignorar pastas de dependências
+venv/
+node_modules/
+__pycache__/
+
+# Ignorar arquivos temporários
+*.log
+*.tmp
+*.DS_Store
+
+# Ignorar arquivos do sistema
+Thumbs.db
