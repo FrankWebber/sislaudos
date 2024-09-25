@@ -1,0 +1,33 @@
+version: '3.8'  # Definindo a versão do Compose
+
+services:
+  sislaudos-node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      - sislaudos-python
+    networks:
+      - sislaudos-network
+
+  sislaudos-python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=production
+    networks:
+      - sislaudos-network
+
+networks:
+  sislaudos-network:
+    driver: bridge

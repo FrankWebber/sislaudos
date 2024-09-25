@@ -1,0 +1,20 @@
+# Usar a imagem oficial do Python 3.11-slim para um ambiente mais leve
+FROM python:3.11-slim
+
+# Criar um diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copiar o arquivo de dependências (requirements.txt) para o container
+COPY requirements.txt .
+
+# Instalar as dependências necessárias sem cache para um container mais leve
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o restante do código Python para o container
+COPY . .
+
+# Expor a porta que o Gunicorn/Flask vai usar
+EXPOSE 5000
+
+# Comando para iniciar o servidor com Gunicorn em produção
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "scripts.process:app"]
