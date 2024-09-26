@@ -7,6 +7,45 @@
 
 
   <style>
+     footer {
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      flex: 1;
+      margin: 10px;
+      min-width: 200px;
+    }
+
+    .footer-section h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 5px;
+    }
+
+    .footer-section p, .footer-section li {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 15px;
+      font-size: 12px;
+      border-top: 1px solid #333;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
@@ -297,4 +336,29 @@
     // Chama a função updateFilename quando a página carrega
     window.onload = updateFilename;
 </script>
+  <footer>
+    <div class="footer-container">
+      <!-- Seção Sobre a Empresa -->
+      <div class="footer-section">
+        <h4>Sobre a Empresa</h4>
+        <p>EDU TECH INOVA LTDA (CNPJ: 49.977.892/0001-74)</p>
+        <p>Soluções educacionais e desenvolvimento de software sob encomenda.</p>
+        <p class="address">R. Delmiro Leão, 78 - Manaus, AM</p>
+      </div>
+
+      <!-- Seção Nossa Equipe -->
+      <div class="footer-section">
+        <h4>Nossa Equipe</h4>
+        <ul>
+          <li><strong>Mauro Lima</strong> - Proponente</li>
+          <li><strong>Marcus Lima</strong> - Analista de Sistemas</li>
+          <li><strong>Roberto Araújo</strong> - Relações Públicas</li>
+          <li><strong>Fábio Cunha</strong> - Vendas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 </body></html>
