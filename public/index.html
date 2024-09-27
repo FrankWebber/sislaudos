@@ -8,46 +8,45 @@
   <link rel="icon" href="doctor.png" type="image/png">
 
   <style>
-     footer {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  padding: 10px 0;
-  font-family: Arial, sans-serif;
-}
+    footer {
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+      padding: 10px 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+    .footer-section {
+      flex: 1;
+      margin: 10px;
+      min-width: 200px;
+    }
 
-.footer-section {
-  flex: 1;
-  margin: 10px;
-  min-width: 200px;
-}
+    .footer-section h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 5px;
+    }
 
-.footer-section h4 {
-  font-size: 16px;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 5px;
-}
+    .footer-section p, .footer-section li {
+      font-size: 12px;
+      line-height: 1.5;
+    }
 
-.footer-section p, .footer-section li {
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 10px;
-  font-size: 12px;
-  border-top: 1px solid #333;
-}
-
+    .footer-bottom {
+      text-align: center;
+      padding-top: 10px;
+      font-size: 12px;
+      border-top: 1px solid #333;
+    }
 
     body {
       font-family: Arial, sans-serif;
@@ -55,6 +54,7 @@
       padding: 20px;
       background-color: #f9f9f9;
     }
+    
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -62,10 +62,12 @@
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     h1, h2 {
       text-align: center;
       color: #333;
     }
+
     textarea, input[type="text"], input[type="file"] {
       width: 100%;
       padding: 10px;
@@ -74,9 +76,11 @@
       border-radius: 5px;
       border: 1px solid #ddd;
     }
+
     .button-group {
       text-align: center;
     }
+
     button {
       padding: 10px 20px;
       margin: 10px;
@@ -86,33 +90,41 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     #dataPreview {
       margin-top: 20px;
       overflow-x: auto;
     }
+
     .preview-table {
       width: 100%;
       border-collapse: collapse;
     }
+
     .preview-table th, .preview-table td {
       border: 1px solid #ddd;
       padding: 8px;
       font-size: 14px;
     }
+
     .preview-table th {
       background-color: #f2f2f2;
       text-align: left;
     }
+
     #status {
       margin-top: 20px;
       font-weight: bold;
     }
+
     .success {
       color: green;
     }
+
     .error {
       color: red;
     }
@@ -135,31 +147,24 @@
       <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Exportar para Excel</button>
     </div>
 
-    <div id="dataPreview" aria-live="polite">
+    <div id="dataPreview" aria-live="polite"></div>
+    <div id="status" aria-live="assertive"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+  
   <script>
-    function updatePreview() {
-      let preview = document.getElementById('dataPreview');
-      preview.innerHTML = '';
+    let processedData = [];
+
+    function loadFile(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
       
-      let table = document.createElement('table');
-      table.className = 'preview-table';
-      
-      let headerRow = table.insertRow();
-      processedData[0].forEach(header => {
-        let th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-      });
-      
-      for (let i = 1; i < processedData.length; i++) {
-        let row = table.insertRow();
-        processedData[i].forEach((cell) => {
-          let td = row.insertCell();
-          td.textContent = cell;
-        });
+      reader.onload = function(e) {
+        document.getElementById("dataInput").value = e.target.result;
       }
       
-      preview.appendChild(table);
+      reader.readAsText(file);
     }
 
     function processAndPreviewData() {
@@ -193,9 +198,9 @@
 
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (dataLaudoMatch) {
-          row[8] = dataLaudoMatch[1];
-          row[9] = dataLaudoMatch[2];
-          row[10] = dataLaudoMatch[3];
+          row[8] = dataLaudoMatch[1]; // Dia
+          row[9] = dataLaudoMatch[2]; // Mês
+          row[10] = dataLaudoMatch[3]; // Ano
         }
 
         let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
@@ -205,18 +210,18 @@
 
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
-          row[12] = periodoMatch[1];
-          row[13] = periodoMatch[2];
-          row[14] = periodoMatch[3];
-          row[15] = periodoMatch[4];
-          row[16] = periodoMatch[5];
-          row[17] = periodoMatch[6];
-          row[18] = periodoMatch[7];
+          row[12] = periodoMatch[1]; // Removida a palavra "dias"
+          row[13] = periodoMatch[2]; // Dia_Inicio
+          row[14] = periodoMatch[3]; // Mes_Inicio
+          row[15] = periodoMatch[4]; // Ano_Inicio
+          row[16] = periodoMatch[5]; // Dia_Fim
+          row[17] = periodoMatch[6]; // Mes_Fim
+          row[18] = periodoMatch[7]; // Ano_Fim
         }
 
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
         row[19] = cidMatch ? cidMatch[1].trim() : "";
-        row[20] = "5";
+        row[20] = "5"; // Tipo de licença, se necessário
 
         processedData.push(row);
       });
@@ -228,6 +233,31 @@
       status.className = 'success';
       
       updateFilename();
+    }
+
+    function updatePreview() {
+      let preview = document.getElementById('dataPreview');
+      preview.innerHTML = '';
+      
+      let table = document.createElement('table');
+      table.className = 'preview-table';
+      
+      let headerRow = table.insertRow();
+      processedData[0].forEach(header => {
+        let th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      
+      for (let i = 1; i < processedData.length; i++) {
+        let row = table.insertRow();
+        processedData[i].forEach(cell => {
+          let td = row.insertCell();
+          td.textContent = cell; // Preencher normalmente sem valores fixos
+        });
+      }
+      
+      preview.appendChild(table);
     }
 
     function updateFilename() {
@@ -262,6 +292,7 @@
 
     window.onload = updateFilename;
   </script>
+  
   <footer>
     <div class="footer-container">
       <div class="footer-section">
