@@ -1,16 +1,17 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SisLaudos - Processador de Laudos Médicos</title>
   
   <link rel="icon" href="doctor.png" type="image/png">
 
-
   <style>
      footer {
   background-color: #1a1a1a;
   color: #f0f0f0;
-  padding: 10px 0; /* Reduzi o padding para 10px */
+  padding: 10px 0;
   font-family: Arial, sans-serif;
 }
 
@@ -29,15 +30,15 @@
 }
 
 .footer-section h4 {
-  font-size: 16px; /* Diminui o tamanho da fonte */
+  font-size: 16px;
   margin-bottom: 8px;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 5px;
 }
 
 .footer-section p, .footer-section li {
-  font-size: 12px; /* Diminui o tamanho da fonte */
-  line-height: 1.5; /* Ajusta o espaçamento entre linhas */
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .footer-bottom {
@@ -152,57 +153,13 @@
       
       for (let i = 1; i < processedData.length; i++) {
         let row = table.insertRow();
-        processedData[i].forEach((cell, index) => {
+        processedData[i].forEach((cell) => {
           let td = row.insertCell();
-          if (index === 0 && cell === "") {
-            // Se o nome do servidor estiver vazio, tente completá-lo
-            td.textContent = "ALCINDO DE ANDRADE LIMA";
-            td.style.color = "blue";
-            td.title = "Nome preenchido manualmente. Por favor, verifique se está correto.";
-          } else if (index === 1 && cell === "") {
-            // Se a matrícula estiver vazia, preencha com 122875
-            td.textContent = "122875";
-            td.style.color = "blue";
-            td.title = "Matrícula preenchida manualmente. Por favor, verifique se está correta.";
-          } else {
-            td.textContent = cell;
-          }
+          td.textContent = cell;
         });
       }
       
       preview.appendChild(table);
-    }
-
-    // Atualiza a função processAndPreviewData para usar a nova função updatePreview
-    function processAndPreviewData() {
-      // ... (código existente para processamento)
-
-      updatePreview();
-
-      let status = document.getElementById('status');
-      status.textContent = "Dados processados com sucesso! Pronto para exportar. Nomes e matrículas preenchidos manualmente estão marcados em azul.";
-      status.className = 'success';
-    }
-  </script>
-</div>
-    
-    <div id="status" aria-live="assertive"></div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-  
-  <script>
-    let processedData = [];
-
-    function loadFile(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      
-      reader.onload = function(e) {
-        document.getElementById("dataInput").value = e.target.result;
-      }
-      
-      reader.readAsText(file);
     }
 
     function processAndPreviewData() {
@@ -236,9 +193,9 @@
 
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (dataLaudoMatch) {
-          row[8] = dataLaudoMatch[1]; // Dia
-          row[9] = dataLaudoMatch[2]; // Mês
-          row[10] = dataLaudoMatch[3]; // Ano
+          row[8] = dataLaudoMatch[1];
+          row[9] = dataLaudoMatch[2];
+          row[10] = dataLaudoMatch[3];
         }
 
         let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
@@ -248,13 +205,13 @@
 
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
-          row[12] = periodoMatch[1]; // Removida a palavra "dias"
-          row[13] = periodoMatch[2]; // Dia_Inicio
-          row[14] = periodoMatch[3]; // Mes_Inicio
-          row[15] = periodoMatch[4]; // Ano_Inicio
-          row[16] = periodoMatch[5]; // Dia_Fim
-          row[17] = periodoMatch[6]; // Mes_Fim
-          row[18] = periodoMatch[7]; // Ano_Fim
+          row[12] = periodoMatch[1];
+          row[13] = periodoMatch[2];
+          row[14] = periodoMatch[3];
+          row[15] = periodoMatch[4];
+          row[16] = periodoMatch[5];
+          row[17] = periodoMatch[6];
+          row[18] = periodoMatch[7];
         }
 
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
@@ -270,39 +227,7 @@
       status.textContent = "Dados processados com sucesso! Pronto para exportar.";
       status.className = 'success';
       
-      // Atualiza o nome do arquivo automaticamente
       updateFilename();
-    }
-
-    function updatePreview() {
-      let preview = document.getElementById('dataPreview');
-      preview.innerHTML = '';
-      
-      let table = document.createElement('table');
-      table.className = 'preview-table';
-      
-      let headerRow = table.insertRow();
-      processedData[0].forEach(header => {
-        let th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-      });
-      
-      for (let i = 1; i < processedData.length; i++) {
-        let row = table.insertRow();
-        processedData[i].forEach((cell, index) => {
-          let td = row.insertCell();
-          if (index === 0 && cell === "") {
-            td.textContent = "ALCINDO DE ANDRADE LIMA";
-            td.style.color = "blue";
-            td.title = "Nome preenchido manualmente. Por favor, verifique se está correto.";
-          } else {
-            td.textContent = cell;
-          }
-        });
-      }
-      
-      preview.appendChild(table);
     }
 
     function updateFilename() {
@@ -335,12 +260,10 @@
       status.className = 'success';
     }
 
-    // Chama a função updateFilename quando a página carrega
     window.onload = updateFilename;
-</script>
+  </script>
   <footer>
     <div class="footer-container">
-      <!-- Seção Sobre a Empresa -->
       <div class="footer-section">
         <h4>Sobre a Empresa</h4>
         <p>EDU TECH INOVA LTDA (CNPJ: 49.977.892/0001-74)</p>
@@ -348,7 +271,6 @@
         <p class="address">R. Delmiro Leão, 78 - Manaus, AM</p>
       </div>
 
-      <!-- Seção Nossa Equipe -->
       <div class="footer-section">
         <h4>Nossa Equipe</h4>
         <ul>
@@ -363,4 +285,5 @@
       <p>&copy; 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.</p>
     </div>
   </footer>
-</body></html>
+</body>
+</html>
