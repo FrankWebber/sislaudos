@@ -16,82 +16,97 @@ def processar_laudo():
         raw_text = f.read()
 
     # Processar o texto
-    processed_data = process_text(raw_text)
+    result = process_text(raw_text)
 
-    # Gerar arquivo Excel
-    df = pd.DataFrame(processed_data[1:], columns=processed_data[0])  # Exclui o cabeçalho da lista
-    output_file = os.path.join('uploads', 'laudo_processado.xlsx')
-    df.to_excel(output_file, index=False)
-
-    return jsonify({"file": 'laudo_processado.xlsx', "message": "Arquivo processado com sucesso."})
+    return jsonify(result)
 
 def process_text(text):
-    processed_data = []
-    entries = text.split("\n\n")  # Ajuste como necessário para separar os laudos
-
-    # Adicionar cabeçalho à planilha
-    header = ["Nome_Servidor", "Matrícula", "Digito", "Letra", "Lotado", "Cargo", "Cidade", "Telefone", 
-              "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", "Ano", "Dias", "Dia_Ini", 
-              "Mes_Ini", "Ano_Ini", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", "Tipo", "Reexaminar", 
-              "Reassumir", "Prorrogação"]
-    processed_data.append(header)
+    laudos_sucesso = []
+    laudos_erro = []
+    
+    entries = text.split("\n\n")
+    header = ["Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo", "Cidade", "Telefone", 
+              "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", "Período_Licença", 
+              "Dia_Inicio", "Mes_Inicio", "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", "Tipo", "Motivo"]
 
     for entry in entries:
-        # Inicializar linha de dados
-        row = ["" for _ in range(len(header))]  # Cria uma linha vazia com o tamanho do cabeçalho
-
-        # Extrair Matrícula
-        matricula_match = re.search(r'matrícula\s*(?:n°)?\s*(\d+)(?:-(\d)([A-Za-z])?)?', entry, re.IGNORECASE)
+        row = ["" for _ in range(len(header))]
+        erro = False
+        
+        # Extração dos campos
+        matricula_match = re.search(r'matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?', entry, re.IGNORECASE)
         if matricula_match:
-            row[1] = matricula_match.group(1)  # Matrícula
-            row[2] = matricula_match.group(2) if matricula_match.group(2) else ""  # Dígito
-            row[3] = matricula_match.group(3) if matricula_match.group(3) else ""  # Letra
+            row[1] = matricula_match.group(1).replace('.', '')  # Remover pontos
+            row[2] = matricula_match.group(2) if matricula_match.group(2) else ""
+            row[3] = matricula_match.group(3) if matricula_match.group(3) else ""
+        else:
+            erro = True
 
-        # Extrair Nome
         nome_match = re.search(r'servidor\(a\)\s+(.+?)(?=\s+CPF:)', entry, re.IGNORECASE)
         row[0] = nome_match.group(1).strip() if nome_match else ""
+        if not nome_match:
+            erro = True
 
-        # Extrair Cargo
         cargo_match = re.search(r'Cargo de:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
         row[4] = cargo_match.group(1).strip() if cargo_match else ""
+        if not cargo_match:
+            erro = True
 
-        # Extrair Dias
-        dias_match = re.search(r'Por\s+(\d+)\s+dias', entry, re.IGNORECASE)
-        row[13] = dias_match.group(1) if dias_match else ""
-
-        # Extrair Cidade
         cidade_match = re.search(r'cidade:\s+(.+?)(?=\/|\n)', entry, re.IGNORECASE)
         row[6] = cidade_match.group(1).strip() if cidade_match else ""
+        if not cidade_match:
+            erro = True
 
-        # Extrair Número do Laudo
-        laudo_match = re.search(r'LAUDO MÉDICO N°\s+(\d+)', entry, re.IGNORECASE)
+        telefone_match = re.search(r'telefone:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
+        row[7] = telefone_match.group(1).strip() if telefone_match else ""
+        if not telefone_match:
+            erro = True
+
+        # Lógica de extração para a data do laudo
+        data_laudo_match = re.search(r'Data\s+(\d{2})\/(\d{2})\/(\d{4})', entry)
+        if data_laudo_match:
+            row[8] = data_laudo_match.group(1)  # Dia
+            row[9] = data_laudo_match.group(2)  # Mês
+            row[10] = data_laudo_match.group(3)  # Ano
+        else:
+            erro = True
+
+        # Extração do número do laudo médico
+        laudo_match = re.search(r'LAUDO MÉDICO N°\s+(\d+\/\d+)', entry)
         row[11] = laudo_match.group(1) if laudo_match else ""
 
-        # Extrair Período de Data
-        periodo_match = re.search(r'(\d{2}/\d{2}/\d{4})\s+(?:à|a)\s+(\d{2}/\d{2}/\d{4})', entry)
+        # Extração do período de licença
+        periodo_match = re.search(r'Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})', entry)
         if periodo_match:
-            dia_ini, dia_fim = periodo_match.group(1).split('/')
-            row[14], row[15], row[16] = dia_ini, dia_fim, periodo_match.group(2)  # Data Fim
+            row[12] = periodo_match.group(1)  # Número de dias
+            row[13] = periodo_match.group(2)  # Dia_Inicio
+            row[14] = periodo_match.group(3)  # Mês_Inicio
+            row[15] = periodo_match.group(4)  # Ano_Inicio
+            row[16] = periodo_match.group(5)  # Dia_Fim
+            row[17] = periodo_match.group(6)  # Mês_Fim
+            row[18] = periodo_match.group(7)  # Ano_Fim
         else:
-            row[14], row[15], row[16] = "", "", ""  # Data Início e Fim vazias
+            erro = True
 
-        # Extrair CID
-        cid_match = re.search(r'CID\s+([A-Z0-9.,\s]+)', entry, re.IGNORECASE)
+        # Extração do CID
+        cid_match = re.search(r'CID\s+([A-Z0-9.,\s]+)', entry)
         row[19] = cid_match.group(1).strip() if cid_match else ""
 
-        # Determinar Tipo baseado no CID
-        if row[19] == "Z76.3":
-            row[20] = 24  # Motivo
-        elif row[19] == "Z39.2":
-            row[20] = 4  # Motivo
+        # Definir o motivo baseado no CID
+        if row[19] == "Z39.2":
+            row[20] = 4  # Motivo para Z39.2 LICENÇA MATERNIDADE
+        elif row[19] == "Z76.3":
+            row[20] = 24  # Motivo para Z76.3 LICENÇA SAÚDE PARA ACOMPANHAR PESSOA DA FAMILIA HOSPITALIZADA 
         else:
-            row[20] = 1  # Motivo
+            row[20] = 1  # Para qualquer outro CID
 
-        # Se a linha tiver dados relevantes, adiciona ao processed_data
-        if any(row):  # Se alguma coluna tiver dado relevante
-            processed_data.append(row)
+        # Se houver qualquer erro de extração, adiciona aos laudos com erro
+        if erro:
+            laudos_erro.append(row)
+        else:
+            laudos_sucesso.append(row)
 
-    return processed_data
+    return laudos_sucesso, laudos_erro
 
 if __name__ == '__main__':
     app.run(port=5000)

@@ -8,126 +8,141 @@
   <link rel="icon" href="doctor.png" type="image/png">
 
   <style>
-    footer {
-      background-color: #1a1a1a;
-      color: #f0f0f0;
-      padding: 10px 0;
-      font-family: Arial, sans-serif;
-    }
-    
-    .footer-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+/* Estilos do corpo e container */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
 
-    .footer-section {
-      flex: 1;
-      margin: 10px;
-      min-width: 200px;
-    }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .footer-section h4 {
-      font-size: 16px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid #f0f0f0;
-      padding-bottom: 5px;
-    }
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
 
-    .footer-section p, .footer-section li {
-      font-size: 12px;
-      line-height: 1.5;
-    }
+/* Estilos para textarea e inputs */
+textarea, input[type="text"], input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
 
-    .footer-bottom {
-      text-align: center;
-      padding-top: 10px;
-      font-size: 12px;
-      border-top: 1px solid #333;
-    }
+textarea {
+  border: 1px solid #007bff;
+  transition: border 0.3s;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+textarea:focus {
+  border-color: #0056b3;
+}
 
-    h1, h2 {
-      text-align: center;
-      color: #333;
-    }
+.button-group {
+  text-align: center;
+}
 
-    textarea, input[type="text"], input[type="file"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      box-sizing: border-box;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    .button-group {
-      text-align: center;
-    }
+button:hover {
+  background-color: #0056b3;
+}
 
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+/* Estilos para a tabela de preview */
+#dataPreview {
+  margin-top: 20px;
+  overflow-x: auto;
+}
 
-    button:hover {
-      background-color: #0056b3;
-    }
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    #dataPreview {
-      margin-top: 20px;
-      overflow-x: auto;
-    }
+.preview-table th, .preview-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
 
-    .preview-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.preview-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
 
-    .preview-table th, .preview-table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      font-size: 14px;
-    }
+#status {
+  margin-top: 20px;
+  font-weight: bold;
+}
 
-    .preview-table th {
-      background-color: #f2f2f2;
-      text-align: left;
-    }
+.success {
+  color: green;
+}
 
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
-    }
+.error {
+  color: red;
+}
 
-    .success {
-      color: green;
-    }
+/* Estilos para o footer */
+footer {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 20px 0;
+}
 
-    .error {
-      color: red;
-    }
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
+}
+
+.footer-section h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #007bff; /* Cor do título */
+  border-bottom: 1px solid #ddd; /* Borda mais suave */
+  padding-bottom: 5px;
+}
+
+.footer-section p, .footer-section li {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 12px;
+  border-top: 1px solid #ccc; /* Borda clara */
+}
+
   </style>
 </head>
 <body>
@@ -138,13 +153,14 @@
     <label for="fileInput">Carregar arquivo de texto</label>
     <input type="file" id="fileInput" accept=".txt" onchange="loadFile(event)">
 
-    <textarea id="dataInput" rows="15" placeholder="Cole os dados brutos aqui ou carregue um arquivo de texto. O formato esperado é o padrão de laudos médicos com informações como nome do servidor, matrícula, cargo, período da licença, etc."></textarea>
+    <textarea id="dataInput" rows="15" placeholder="Cole os dados brutos aqui ou carregue um arquivo de texto (.txt)."></textarea>
 
     <input type="text" id="outputFilename" placeholder="Nome do arquivo de saída (sem extensão)">
 
     <div class="button-group">
       <button onclick="processAndPreviewData()" aria-label="Processar e pré-visualizar dados">Processar e Pré-visualizar</button>
       <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Exportar para Excel</button>
+      <button id="downloadErrorReport" style="display: none;" onclick="downloadErrorReport()" aria-label="Baixar relatório de dados não processados">Baixar Relatório de Erros</button>
     </div>
 
     <div id="dataPreview" aria-live="polite"></div>
@@ -154,6 +170,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   
   <script>
+    function updateFilename() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      
+      const filename = `LAUDO_${day}.${month}.${year}_${hours}H${minutes}M`;
+      document.getElementById("outputFilename").value = filename; 
+    }
+
     let processedData = [];
 
     function loadFile(event) {
@@ -174,16 +202,17 @@
 
       processedData.push([
         "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo",
-        "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", 
-        "Período_Licença", "Dia_Inicio", "Mes_Inicio", "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", 
-        "CID", "Tipo_Licença"
+        "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", 
+        "LAUDO MÉDICO N°", "Período_Licença", "Dia_Inicio", "Mes_Inicio", 
+        "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", 
+        "Tipo_Licença", "Motivo"
       ]);
 
       entries.forEach(entry => {
         let row = new Array(21).fill("");
 
         row[0] = entry.match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+público,)/)?.[1]?.trim() || "";
-        
+
         let matriculaMatch = entry.match(/matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
         if (matriculaMatch) {
           row[1] = matriculaMatch[1].replace(/\./g, "") || "";
@@ -210,18 +239,29 @@
 
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
-          row[12] = periodoMatch[1]; // Removida a palavra "dias"
+          row[12] = periodoMatch[1]; // Número de dias
           row[13] = periodoMatch[2]; // Dia_Inicio
-          row[14] = periodoMatch[3]; // Mes_Inicio
+          row[14] = periodoMatch[3]; // Mês_Inicio
           row[15] = periodoMatch[4]; // Ano_Inicio
           row[16] = periodoMatch[5]; // Dia_Fim
-          row[17] = periodoMatch[6]; // Mes_Fim
+          row[17] = periodoMatch[6]; // Mês_Fim
           row[18] = periodoMatch[7]; // Ano_Fim
         }
 
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
         row[19] = cidMatch ? cidMatch[1].trim() : "";
-        row[20] = "5"; // Tipo de licença, se necessário
+
+        // Define o Tipo de Licença
+        row[20] = 5; // Sempre 5
+
+        // Adiciona a lógica para definir o motivo
+        if (row[19] === "Z39.2") {
+          row[21] = 4; // Motivo para Z39.2
+        } else if (row[19] === "Z76.3") {
+          row[21] = 24; // Motivo para Z76.3
+        } else {
+          row[21] = 1; // Para qualquer outro CID
+        }
 
         processedData.push(row);
       });
@@ -260,18 +300,6 @@
       preview.appendChild(table);
     }
 
-    function updateFilename() {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      
-      const filename = `LAUDO${day}.${month}.${year}.${hours}H${minutes}M`;
-      document.getElementById("outputFilename").value = filename;
-    }
-
     function exportToExcel() {
       if (processedData.length === 0) {
         alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
@@ -292,7 +320,7 @@
 
     window.onload = updateFilename;
   </script>
-  
+
   <footer>
     <div class="footer-container">
       <div class="footer-section">
@@ -313,7 +341,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.</p>
+      <p>© 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.</p>
     </div>
   </footer>
 </body>
