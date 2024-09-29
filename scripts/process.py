@@ -1,6 +1,4 @@
 from flask import Flask, request, jsonify
-import pandas as pd
-import os
 import re
 
 app = Flask(__name__)
@@ -16,53 +14,66 @@ def processar_laudo():
         raw_text = f.read()
 
     # Processar o texto
-    result = process_text(raw_text)
+    laudos_sucesso, laudos_erro = process_text(raw_text)
 
-    return jsonify(result)
+    return jsonify({
+        'laudos_sucesso': laudos_sucesso,
+        'laudos_erro': laudos_erro
+    })
 
 def process_text(text):
     laudos_sucesso = []
     laudos_erro = []
-    
+
+    # Definir os headers/colunas para os dados
+    header = [
+        "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo", "Cidade", "Telefone",
+        "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", "Período_Licença",
+        "Dia_Inicio", "Mes_Inicio", "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", 
+        "CID", "Tipo", "Motivo", "Data_Final_Unificada", "Reexaminar", "Reassumir", "Prorrogacao"
+    ]
+
+    # Quebrar o texto em entradas separadas por blocos
     entries = text.split("\n\n")
-    header = ["Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo", "Cidade", "Telefone", 
-              "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", "Período_Licença", 
-              "Dia_Inicio", "Mes_Inicio", "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", "Tipo", "Motivo"]
 
     for entry in entries:
         row = ["" for _ in range(len(header))]
         erro = False
-        
-        # Extração dos campos
+
+        # Extração da matrícula
         matricula_match = re.search(r'matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?', entry, re.IGNORECASE)
         if matricula_match:
-            row[1] = matricula_match.group(1).replace('.', '')  # Remover pontos
+            row[1] = matricula_match.group(1).replace('.', '')  # Remover pontos da matrícula
             row[2] = matricula_match.group(2) if matricula_match.group(2) else ""
             row[3] = matricula_match.group(3) if matricula_match.group(3) else ""
         else:
             erro = True
 
+        # Extração do nome do servidor
         nome_match = re.search(r'servidor\(a\)\s+(.+?)(?=\s+CPF:)', entry, re.IGNORECASE)
         row[0] = nome_match.group(1).strip() if nome_match else ""
         if not nome_match:
             erro = True
 
+        # Extração do cargo
         cargo_match = re.search(r'Cargo de:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
-        row[4] = cargo_match.group(1).strip() if cargo_match else ""
+        row[5] = cargo_match.group(1).strip() if cargo_match else ""
         if not cargo_match:
             erro = True
 
+        # Extração da cidade
         cidade_match = re.search(r'cidade:\s+(.+?)(?=\/|\n)', entry, re.IGNORECASE)
         row[6] = cidade_match.group(1).strip() if cidade_match else ""
         if not cidade_match:
             erro = True
 
+        # Extração do telefone
         telefone_match = re.search(r'telefone:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
         row[7] = telefone_match.group(1).strip() if telefone_match else ""
         if not telefone_match:
             erro = True
 
-        # Lógica de extração para a data do laudo
+        # Extração da data do laudo
         data_laudo_match = re.search(r'Data\s+(\d{2})\/(\d{2})\/(\d{4})', entry)
         if data_laudo_match:
             row[8] = data_laudo_match.group(1)  # Dia
@@ -99,6 +110,12 @@ def process_text(text):
             row[20] = 24  # Motivo para Z76.3 LICENÇA SAÚDE PARA ACOMPANHAR PESSOA DA FAMILIA HOSPITALIZADA 
         else:
             row[20] = 1  # Para qualquer outro CID
+
+        # Acrescentar as colunas "Data Final Unificada", "Reexaminar", "Reassumir", e "Prorrogação"
+        row[21] = f'{row[18]}/{row[17]}/{row[16]}'  # Data Final Unificada (Ano_Fim/Mês_Fim/Dia_Fim)
+        row[22] = "N"  # Reexaminar
+        row[23] = "S"  # Reassumir
+        row[24] = "N"  # Prorrogação
 
         # Se houver qualquer erro de extração, adiciona aos laudos com erro
         if erro:

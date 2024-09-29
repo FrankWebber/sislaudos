@@ -1135,155 +1135,165 @@ Servicia
   
   <script>
     function updateFilename() {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      
-      const filename = `LAUDO_${day}.${month}.${year}_${hours}H${minutes}M`;
-      document.getElementById("outputFilename").value = filename; 
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        
+        const filename = `LAUDO_${day}.${month}.${year}_${hours}H${minutes}M`;
+        document.getElementById("outputFilename").value = filename; 
     }
 
     let processedData = [];
 
     function loadFile(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      
-      reader.onload = function(e) {
-        document.getElementById("dataInput").value = e.target.result;
-      }
-      
-      reader.readAsText(file);
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            document.getElementById("dataInput").value = e.target.result;
+        }
+        
+        reader.readAsText(file);
     }
 
     function processAndPreviewData() {
-      let rawData = document.getElementById("dataInput").value;
-      let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
-      processedData = [];
+        let rawData = document.getElementById("dataInput").value;
+        let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
+        processedData = [];
 
-      processedData.push([
-        "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo",
-        "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", 
-        "LAUDO MÉDICO N°", "Período_Licença", "Dia_Inicio", "Mes_Inicio", 
-        "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", 
-        "Tipo_Licença", "Motivo"
-      ]);
+        // Atualize o cabeçalho para incluir as novas colunas
+        processedData.push([
+            "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo",
+            "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", 
+            "LAUDO MÉDICO N°", "Período_Licença", "Dia_Inicio", "Mes_Inicio", 
+            "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", 
+            "Tipo_Licença", "Motivo", 
+            "Data_Final_Unificada", "Reexaminar", "Reassumir", "Prorrogacao"
+        ]);
 
-      entries.forEach(entry => {
-        let row = new Array(21).fill("");
+        entries.forEach(entry => {
+            let row = new Array(25).fill(""); // Atualize para 25 colunas
 
-        row[0] = entry.match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+público,)/)?.[1]?.trim() || "";
+            row[0] = entry.match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+público,)/)?.[1]?.trim() || "";
 
-        let matriculaMatch = entry.match(/matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
-        if (matriculaMatch) {
-          row[1] = matriculaMatch[1].replace(/\./g, "") || "";
-          row[2] = matriculaMatch[2] || "";
-          row[3] = matriculaMatch[3] || "";
-        }
+            let matriculaMatch = entry.match(/matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
+            if (matriculaMatch) {
+                row[1] = matriculaMatch[1].replace(/\./g, "") || "";
+                row[2] = matriculaMatch[2] || "";
+                row[3] = matriculaMatch[3] || "";
+            }
 
-        row[4] = entry.match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[5] = entry.match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[6] = entry.match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
-        row[7] = entry.match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+            row[4] = entry.match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+            row[5] = entry.match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+            row[6] = entry.match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
+            row[7] = entry.match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
-        let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
-        if (dataLaudoMatch) {
-          row[8] = dataLaudoMatch[1]; // Dia
-          row[9] = dataLaudoMatch[2]; // Mês
-          row[10] = dataLaudoMatch[3]; // Ano
-        }
+            let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
+            if (dataLaudoMatch) {
+                row[8] = dataLaudoMatch[1]; // Dia
+                row[9] = dataLaudoMatch[2]; // Mês
+                row[10] = dataLaudoMatch[3]; // Ano
+            }
 
-        let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
-        if (laudoMatch) {
-          row[11] = `${laudoMatch[1]}/${laudoMatch[2]}`;
-        }
+            let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
+            if (laudoMatch) {
+                row[11] = `${laudoMatch[1]}/${laudoMatch[2]}`;
+            }
 
-        let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
-        if (periodoMatch) {
-          row[12] = periodoMatch[1]; // Número de dias
-          row[13] = periodoMatch[2]; // Dia_Inicio
-          row[14] = periodoMatch[3]; // Mês_Inicio
-          row[15] = periodoMatch[4]; // Ano_Inicio
-          row[16] = periodoMatch[5]; // Dia_Fim
-          row[17] = periodoMatch[6]; // Mês_Fim
-          row[18] = periodoMatch[7]; // Ano_Fim
-        }
+            let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
+            if (periodoMatch) {
+                row[12] = periodoMatch[1]; // Número de dias
+                row[13] = periodoMatch[2]; // Dia_Inicio
+                row[14] = periodoMatch[3]; // Mês_Inicio
+                row[15] = periodoMatch[4]; // Ano_Inicio
+                row[16] = periodoMatch[5]; // Dia_Fim
+                row[17] = periodoMatch[6]; // Mês_Fim
+                row[18] = periodoMatch[7]; // Ano_Fim
+            }
 
-        let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-        row[19] = cidMatch ? cidMatch[1].trim() : "";
+            let cidMatch = entry.match(/CID\s+([\w., ]+)/);
+            row[19] = cidMatch ? cidMatch[1].trim() : "";
 
-        // Define o Tipo de Licença
-        row[20] = 5; // Sempre 5
+            // Define o Tipo de Licença
+            row[20] = 5; // Sempre 5
 
-        // Adiciona a lógica para definir o motivo
-        if (row[19] === "Z39.2") {
-          row[21] = 4; // Motivo para Z39.2
-        } else if (row[19] === "Z76.3") {
-          row[21] = 24; // Motivo para Z76.3
-        } else {
-          row[21] = 1; // Para qualquer outro CID
-        }
+            // Adiciona a lógica para definir o motivo
+            if (row[19] === "Z39.2") {
+                row[21] = 4; // Motivo para Z39.2
+            } else if (row[19] === "Z76.3") {
+                row[21] = 24; // Motivo para Z76.3
+            } else {
+                row[21] = 1; // Para qualquer outro CID
+            }
 
-        processedData.push(row);
-      });
+            // Adiciona as novas colunas
+            row[22] = `${row[16]}/${row[17]}/${row[18]}`; // Data Final Unificada (Dia_Fim/Mês_Fim/Ano_Fim)
 
-      updatePreview();
+            row[23] = "N"; // Reexaminar
+            row[24] = "S"; // Reassumir
+            row[25] = "N"; // Prorrogação
 
-      let status = document.getElementById('status');
-      status.textContent = "Dados processados com sucesso! Pronto para exportar.";
-      status.className = 'success';
-      
-      updateFilename();
+            processedData.push(row);
+        });
+
+        updatePreview();
+
+        let status = document.getElementById('status');
+        status.textContent = "Dados processados com sucesso! Pronto para exportar.";
+        status.className = 'success';
+        
+        updateFilename();
     }
 
     function updatePreview() {
-      let preview = document.getElementById('dataPreview');
-      preview.innerHTML = '';
-      
-      let table = document.createElement('table');
-      table.className = 'preview-table';
-      
-      let headerRow = table.insertRow();
-      processedData[0].forEach(header => {
-        let th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-      });
-      
-      for (let i = 1; i < processedData.length; i++) {
-        let row = table.insertRow();
-        processedData[i].forEach(cell => {
-          let td = row.insertCell();
-          td.textContent = cell; // Preencher normalmente sem valores fixos
+        let preview = document.getElementById('dataPreview');
+        preview.innerHTML = '';
+        
+        let table = document.createElement('table');
+        table.className = 'preview-table';
+        
+        let headerRow = table.insertRow();
+        processedData[0].forEach(header => {
+            let th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
         });
-      }
-      
-      preview.appendChild(table);
+        
+        for (let i = 1; i < processedData.length; i++) {
+            let row = table.insertRow();
+            processedData[i].forEach(cell => {
+                let td = row.insertCell();
+                td.textContent = cell; // Preencher normalmente sem valores fixos
+            });
+        }
+        
+        preview.appendChild(table);
     }
 
     function exportToExcel() {
-      if (processedData.length === 0) {
-        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
-        return;
-      }
+        if (processedData.length === 0) {
+            alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+            return;
+        }
 
-      let ws = XLSX.utils.aoa_to_sheet(processedData);
-      let wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Laudos Médicos");
+        let ws = XLSX.utils.aoa_to_sheet(processedData);
+        let wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Laudos Médicos");
 
-      const filename = document.getElementById("outputFilename").value || "Laudos_Medicos";
-      XLSX.writeFile(wb, `${filename}.xlsx`);
+        const filename = document.getElementById("outputFilename").value || "Laudos_Medicos";
+        XLSX.writeFile(wb, `${filename}.xlsx`);
 
-      let status = document.getElementById('status');
-      status.textContent = "Arquivo Excel exportado com sucesso!";
-      status.className = 'success';
+        let status = document.getElementById('status');
+        status.textContent = "Arquivo Excel exportado com sucesso!";
+        status.className = 'success';
     }
 
     window.onload = updateFilename;
-  </script>
+</script>
+
 
   <footer>
     <div class="footer-container">
