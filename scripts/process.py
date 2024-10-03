@@ -5,125 +5,37 @@ app = Flask(__name__)
 
 @app.route('/processar', methods=['POST'])
 def processar_laudo():
-    # Receber o caminho do arquivo
     data = request.json
-    file_path = data['filePath']
+
+    # Verificar se os dados foram enviados
+    if 'data' not in data:
+        return jsonify({'success': False, 'message': 'Nenhum dado enviado.'}), 400
     
-    # Ler o arquivo de texto
-    with open(file_path, 'r', encoding='utf-8') as f:
-        raw_text = f.read()
+    # Obter os dados enviados
+    editable_data = data['data']
 
-    # Processar o texto
-    laudos_sucesso, laudos_erro = process_text(raw_text)
-
-    return jsonify({
-        'laudos_sucesso': laudos_sucesso,
-        'laudos_erro': laudos_erro
-    })
-
-def process_text(text):
+    # Processar os dados editáveis
     laudos_sucesso = []
     laudos_erro = []
 
     # Definir os headers/colunas para os dados
     header = [
-        "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo", "Cidade", "Telefone",
-        "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", "LAUDO MÉDICO N°", "Período_Licença",
-        "Dia_Inicio", "Mes_Inicio", "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", 
-        "CID", "Tipo", "Motivo", "Data_Final_Unificada", "Reexaminar", "Reassumir", "Prorrogacao"
+        "nome1", "matricula2", "digito3", "letra4", "lotado5", "cargo6", "cidade7", "telefone8",
+        "dia_Laudo9", "mes_Laudo10", "ano_Laudo11", "laudo_medico_n12", "período_licença13",
+        "dia_inicio14", "mes_inicio15", "ano_inicio16", "dia_fim17", "mes_fim18", "ano_fim19", 
+        "cid20", "tipo21", "motivo22", "data_final_unificada23", "reexaminar24", "reassumir25", "prorrogacao26"
     ]
 
-    # Quebrar o texto em entradas separadas por blocos
-    entries = text.split("\n\n")
+    # Processar cada entrada editável
+    for entry in editable_data:
+        row = entry  # Use a linha editável diretamente
+        laudos_sucesso.append(row)
 
-    for entry in entries:
-        row = ["" for _ in range(len(header))]
-        erro = False
-
-        # Extração da matrícula
-        matricula_match = re.search(r'matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?', entry, re.IGNORECASE)
-        if matricula_match:
-            row[1] = matricula_match.group(1).replace('.', '')  # Remover pontos da matrícula
-            row[2] = matricula_match.group(2) if matricula_match.group(2) else ""
-            row[3] = matricula_match.group(3) if matricula_match.group(3) else ""
-        else:
-            erro = True
-
-        # Extração do nome do servidor
-        nome_match = re.search(r'servidor\(a\)\s+(.+?)(?=\s+CPF:)', entry, re.IGNORECASE)
-        row[0] = nome_match.group(1).strip() if nome_match else ""
-        if not nome_match:
-            erro = True
-
-        # Extração do cargo
-        cargo_match = re.search(r'Cargo de:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
-        row[5] = cargo_match.group(1).strip() if cargo_match else ""
-        if not cargo_match:
-            erro = True
-
-        # Extração da cidade
-        cidade_match = re.search(r'cidade:\s+(.+?)(?=\/|\n)', entry, re.IGNORECASE)
-        row[6] = cidade_match.group(1).strip() if cidade_match else ""
-        if not cidade_match:
-            erro = True
-
-        # Extração do telefone
-        telefone_match = re.search(r'telefone:\s+(.+?)(?=\n)', entry, re.IGNORECASE)
-        row[7] = telefone_match.group(1).strip() if telefone_match else ""
-        if not telefone_match:
-            erro = True
-
-        # Extração da data do laudo
-        data_laudo_match = re.search(r'Data\s+(\d{2})\/(\d{2})\/(\d{4})', entry)
-        if data_laudo_match:
-            row[8] = data_laudo_match.group(1)  # Dia
-            row[9] = data_laudo_match.group(2)  # Mês
-            row[10] = data_laudo_match.group(3)  # Ano
-        else:
-            erro = True
-
-        # Extração do número do laudo médico
-        laudo_match = re.search(r'LAUDO MÉDICO N°\s+(\d+\/\d+)', entry)
-        row[11] = laudo_match.group(1) if laudo_match else ""
-
-        # Extração do período de licença
-        periodo_match = re.search(r'Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})', entry)
-        if periodo_match:
-            row[12] = periodo_match.group(1)  # Número de dias
-            row[13] = periodo_match.group(2)  # Dia_Inicio
-            row[14] = periodo_match.group(3)  # Mês_Inicio
-            row[15] = periodo_match.group(4)  # Ano_Inicio
-            row[16] = periodo_match.group(5)  # Dia_Fim
-            row[17] = periodo_match.group(6)  # Mês_Fim
-            row[18] = periodo_match.group(7)  # Ano_Fim
-        else:
-            erro = True
-
-        # Extração do CID
-        cid_match = re.search(r'CID\s+([A-Z0-9.,\s]+)', entry)
-        row[19] = cid_match.group(1).strip() if cid_match else ""
-
-        # Definir o motivo baseado no CID
-        if row[19] == "Z39.2":
-            row[20] = 4  # Motivo para Z39.2 LICENÇA MATERNIDADE
-        elif row[19] == "Z76.3":
-            row[20] = 24  # Motivo para Z76.3 LICENÇA SAÚDE PARA ACOMPANHAR PESSOA DA FAMILIA HOSPITALIZADA 
-        else:
-            row[20] = 1  # Para qualquer outro CID
-
-        # Acrescentar as colunas "Data Final Unificada", "Reexaminar", "Reassumir", e "Prorrogação"
-        row[21] = f'{row[18]}/{row[17]}/{row[16]}'  # Data Final Unificada (Ano_Fim/Mês_Fim/Dia_Fim)
-        row[22] = "N"  # Reexaminar
-        row[23] = "S"  # Reassumir
-        row[24] = "N"  # Prorrogação
-
-        # Se houver qualquer erro de extração, adiciona aos laudos com erro
-        if erro:
-            laudos_erro.append(row)
-        else:
-            laudos_sucesso.append(row)
-
-    return laudos_sucesso, laudos_erro
+    # Retornar os laudos processados
+    return jsonify({
+        'laudos_sucesso': laudos_sucesso,
+        'laudos_erro': laudos_erro
+    })
 
 if __name__ == '__main__':
     app.run(port=5000)

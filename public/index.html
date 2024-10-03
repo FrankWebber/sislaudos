@@ -1,150 +1,154 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SisLaudos - Processador de Laudos Médicos</title>
-  
   <link rel="icon" href="doctor.png" type="image/png">
-
   <style>
-/* Estilos do corpo e container */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-}
+    /* Estilos do corpo e container */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-h1, h2 {
-  text-align: center;
-  color: #333;
-}
+    h1,
+    h2 {
+      text-align: center;
+      color: #333;
+    }
 
-/* Estilos para textarea e inputs */
-textarea, input[type="text"], input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
+    /* Estilos para textarea e inputs */
+    textarea,
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
 
-textarea {
-  border: 1px solid #007bff;
-  transition: border 0.3s;
-}
+    textarea {
+      border: 1px solid #007bff;
+      transition: border 0.3s;
+    }
 
-textarea:focus {
-  border-color: #0056b3;
-}
+    textarea:focus {
+      border-color: #0056b3;
+    }
 
-.button-group {
-  text-align: center;
-}
+    .button-group {
+      text-align: center;
+    }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    button:hover {
+      background-color: #0056b3;
+    }
 
-/* Estilos para a tabela de preview */
-#dataPreview {
-  margin-top: 20px;
-  overflow-x: auto;
-}
+    /* Estilos para a tabela de preview */
+    #dataPreview {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
 
-.preview-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+    .preview-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-.preview-table th, .preview-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  font-size: 14px;
-}
+    .preview-table th,
+    .preview-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 14px;
+    }
 
-.preview-table th {
-  background-color: #f2f2f2;
-  text-align: left;
-}
+    .preview-table th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
 
-#status {
-  margin-top: 20px;
-  font-weight: bold;
-}
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
 
-.success {
-  color: green;
-}
+    .success {
+      color: green;
+    }
 
-.error {
-  color: red;
-}
+    .error {
+      color: red;
+    }
 
-/* Estilos para o footer */
-footer {
-  background-color: #f1f1f1;
-  color: #333;
-  padding: 20px 0;
-}
+    /* Estilos para o footer */
+    footer {
+      background-color: #f1f1f1;
+      color: #333;
+      padding: 20px 0;
+    }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-.footer-section {
-  flex: 1;
-  margin: 10px;
-  min-width: 200px;
-}
+    .footer-section {
+      flex: 1;
+      margin: 10px;
+      min-width: 200px;
+    }
 
-.footer-section h4 {
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: #007bff; /* Cor do título */
-  border-bottom: 1px solid #ddd; /* Borda mais suave */
-  padding-bottom: 5px;
-}
+    .footer-section h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #007bff;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
 
-.footer-section p, .footer-section li {
-  font-size: 12px;
-  line-height: 1.5;
-}
+    .footer-section p,
+    .footer-section li {
+      font-size: 12px;
+      line-height: 1.5;
+    }
 
-.footer-bottom {
-  text-align: center;
-  padding-top: 10px;
-  font-size: 12px;
-  border-top: 1px solid #ccc; /* Borda clara */
-}
-
+    .footer-bottom {
+      text-align: center;
+      padding-top: 10px;
+      font-size: 12px;
+      border-top: 1px solid #ccc;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>Processador de Dados de Laudos Médicos</h1>
@@ -153,977 +157,18 @@ footer {
     <label for="fileInput">Carregar arquivo de texto</label>
     <input type="file" id="fileInput" accept=".txt" onchange="loadFile(event)">
 
-    <textarea id="dataInput" rows="15" placeholder="Cole os dados brutos aqui ou carregue um arquivo de texto (.txt).">
-AMAZONAS
-GOVERNO 00 ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) MIRIAN CRISTIELLE MONTEFUSCO PINHEIRO
-CPF: 71814027220
-público, matrícula n° 190.965-7A lotado no (a): SEDUC
-unidade: GABINETE DO SECRETARIO
-ocupado do Cargo de: ASSISTENTE TECNICO
-e residente a: Avenida Desembargador João Machado, N° 169
-CEP: 69043000
-Bairro: Alvorada
-cidade: MANAUS/AMAZONAS
-telefone: (92)98553-8042
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATÁTÁRIA
-Data 30/08/2024
-Be
-p
-Requerente C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N° 283890/2024
-Licença
-Período
-Data do exame
-Por 15 dias
-06/07/2024
-à 20/07/2024
-30/08/2024
-LAUDO
-CID
-Licença 
-002.1
-Decurso de Prazo
-Junta Especial
-Dis Nilufar Medica
-Recestages and Goods SEAD
-CRMAM 56.21
-UNTA Minim PRINTAL DO ESTADO
-Perito
-Perito
-X Clere Diag
-overside Presidente
-2636
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 328C Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-RECEBIDO
-Manaus-AM CEP 69050-030
-ADMINISTRAÇÃO E GESTÃO
-Data: 19 / 09 / 24
-Dandara
-Gerencia de
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) GRACILENE DA SILVA DE SOUZA SIERPINSKI
-CPF: 27515087234
-público, matrícula n° 12287570 lotado no (a): SEDUC
-unidade: GABINETE DO SECRETARIO
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Bispo de Hebron, N° 161
-CEP: 69049450
-Bairro: Redenção
-cidade: MANAUS/AMAZONAS
-telefone: (92) 99159-4431
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATUTÁRIA
-Data 12/09/2024
-Dilo
-pl Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N° 284669/2024
-Licença
-Período
-Data do exame
-Por 90 dias
-03/08/2024
-à 31/10/2024
-12/09/2024
-LAUDO
-CID M75.4, M75.1. M75.0
-Licença 
-Decurso de Prazo
-Junta Especial
-SECRETARIA DE ESTATO DE
-JUNTA MEDICA-PERICIAL
-xootma & deve de Administracio 0 Unstin MAD
-JUNTA MÉDNY PERISIALIO ESTADO
-Dra. Neane Magaihães de AJ.
-Médica Pertis-CRM/AM 4333
-Dear
-Gloves
-Perito
-Perito
-Presidente 2636
-Endereço: Rua Igarapó de Manaus, s/n°, Quadra 3. Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava sede do Prosamim, Centro. Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-Manaus-AM CEP 69050-030
-ADMINISTRAÇÃO E GESTÃO
-RECEBIDO
-Data: 19/09/24
-Dandara
-de assessed
-AMAZONAS
-GOVERNO 00 ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) GRACILENE DA SILVA DE SOUZA SIERPINSKI
-CPF: :27515087234
-público, matrícula n° 1228757E
-lotado no (a): SEDUO
-unidade: GABINETE DO SECRETARIO
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Bispo de Hebron, N° 161
-CEP: 69049450
-Bairro: Redenção cidade: MANAUS/AMAZONAS
-telefone: (92) 99159-4431
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATURÁA
-Data 12/09/2024
-Drea
-pl
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-284670/2024
-Licença
-Período
-Data do exame
-Por 90 dias
-03/08/2024
-à 31/10/2024
-12/09/2024
-LAUDO
-Licença 
-CID M75.4, M75.1, M75.0
-Decurso de Prazo
-SECRETARIA DE ESTADO DE ADMINISTRAC
-Junta Especial
-JUNTA MÉDICA/PERICIAL DO ESTA
-income de Administraction 0 ADA
-Dra. Neane Magalhães de Andre
-JUNTA MEDIC ESTADO
-Médico Paris CRM/AM 4333
-Den Mota V Dias
-Perito
-Perito
-USA
-Endereço: Rua Igarapé de Manous, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-wwwsead.amgov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-Data: 19/09/24
-Dandara
-Cannois da Assistance
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) GRACIMAR DA SILVA SOUZA
-CPF: 45621764234
-público, matrícula n° 150.782-6C
-lotado no (a): SEDUC
-unidade: GABINETE DO SECRETARIO
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Bispo de Hebron, N° 161
-CEP: 69049450
-Bairro: Redenção
-cidade:MANAUS/AMAZONAS
-telefone: (92)99163-1425
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATUTÁRIA
-Data 25/07/2024
-Requerente C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-280354/2024
-Licença
-Período
-Data do exame
-Por 20 dias
-03/07/2024 à 22/07/2024
-25/07/2024
-LAUDO
-Licença 
-CID F41.1
-Decurso de Prazo
-SECRETARIA DE ESTADO DE ADMINISTRAC
-Junta Especial
-JUNTA-MEDICA-PERICIAL DO ESTA
-do 0 ESAU
-MUNTA MÉDICO APPRICATION ESTADO
-Dra. Neane Magalhães de Andrado
-Médica Perita-CRM/AM 4333
-Dan. Gleura Jennes Moto de V Dias
-Presidente, M 2636
-Perito
-Perito
-Presidente
-Endereço: Rua Igarapé de Manous, s/n°, Quadra 3. Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-19 / 09 / 24
-Data:
-Dandara
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) GRACIMAR DA SILVA SOUZA
-CPF: 45621764234
-público, matrícula n° 150.782-60 lotado no (a): SEDUC
-unidade: GABINETE DO SECRETARIO
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Bispo de Hebron, N° 161
-CEP: 69049450
-Bairro: Redenção
-cidade:MANAUS/AMAZONAS
-telefone: (92)99163-1425
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATUTÁRIA
-Data 25/07/2024
-Due
-Requerente C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-280356/2024
-Licença
-Período
-Data do exame
-Por 30 dias
-23/07/2024 à 21/08/2024
-25/07/2024
-LAUDO
-Licença 
-CID F41.1
-Decurso de Prazo
-SECRETARIA DE ESTADO DE ADMINISTRAC
-Junta Especial
-JUNTA MÉDICA-PERICIAL DO ESTA
-lastes de Retada de Administração C Gentlin GRAD
-UNTA MíDIM CURTOIAL on ESTADO
-Dra. Neane Magalhães de Andrac
-Médica Perita-CRM/AM 4333
-Chance Isabe Mom do Dies
-Perito
-Perito
-Presidente
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead:am.gov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-Data: 10 09 / 24
-Dandaro
-Gerfucia de Aposentadori.
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) JULIANA DE ALBUQUERQUE SILVA DAMASCENO
-CPF:49324756249
-público, matrícula n° 182.156-3A lotado no (a): SEDUC
-unidade: EE FRAN C.S.ALBUQUERQUE
-ocupado do Cargo de: PROFESSOR
-e residente a: PADRE MANUEL DA NÓBREGA, N° 173
-CEP: 69040490
-Bairro: DOM PEDRO
-cidade: MANAUS/AMAZONAS
-telefone: (92)98182-9004
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA/ESTATÁTIRIA
-Data 30/08/2024
-Orlinan Albravaque
-Requerente - C.I.N6
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283915/2024
-Licença
-Período
-Data do exame
-Por 120 dias
-19/06/2024
-à 16/10/2024
-30/08/2024
-LAUDO
-Licença 
-CID F32.2, F41.0, F41
-Decurso de Prazo
-Junta Especial
-Dra. Nilufar Medical NUTCLES
-- e Goods SEAD
-CRMAM 8621
-JUNTA MÉDACO PRICIAL DO ESTADO
-Dron. Glass
-Presidential
-Perito
-Perito
-Presidente
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead.amgov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-Data: 10 109/24
-Dandara
-Gerência de Aposentadoria
-GECAP/DGP/SED
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) MARILENE ANDRADE CUNHA
-CPF: 18268994215
-público, matrícula n° 101.979-10 lotado no (a): SEDUC
-unidade: CENTRO EDUC. T. INT. JOSE A. RODR.
-ocupado do Cargo de: PROFESSOR
-e residente a: CINCO DE SETEMBRO, N° 5
-CEP: 69450000
-Bairro: CENTRO
-cidade: CODAJáS/AMAZONAS
-telefone: 0
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 28/08/2024
-Propera
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N° 283659/2024
-Licença
-Período
-Data do exame
-Por 90 dias
-17/06/2024
-à 14/09/2024
-28/08/2024
-LAUDO
-CID S82.1, Z54.0
-Licença 
-Decurso de Prazo
-Junta Especial
-DTa. Nilyfai Zeimarani
-CRMAM 86.21
-Medical
-Secretaria de Estado/Administração e Gestä
-JUNTA MÉDICO PERICIAL DO ESTADO
-Perito
-Perito
-Presidentele V. Dias
-Dra. Glating
-Precidente-CRMIAM 2636
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3. Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-www.sead.amgov.br Fone 3182-2800
-SECRETARIA DE
-Manaus-AM CEP 69050-030
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Data: 19/09/24
-Dondara
-Gerencia de Acosentadorio
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) ROSEMARY GAMA MENEZES
-CPF: 23077212234
-público, matrícula n° 144.736-0A lotado no (a): SEDUO
-unidade: ESC DE 1 E 2 GRAU V DE MENDONCA
-ocupado do Cargo de: PROFESSOR
-e residente a: RUY BARBOSA, N° 294
-CEP: 69000000
-Bairro: CENTRO
-cidade: ITACOATIARA/AMAZONAS
-telefone: (92)98442-9056
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283142/2024
-Licença
-Período
-Data do exame
-Por 90 dias
-04/08/2024
-à 01/11/2024
-22/08/2024
-LAUDO
-Licença 
-CID Z76.3, F84.0
-Decurso de Prazo
-Junta Especial
-Namp
-Dr. José Levy Santos
-Secretaria de Estado administração e Gestá
-Médico Perito
-JUNTA MÉDICO e PERICIAL DO ESTADO
-CRM/AM 6416
-Perito
-Perito
-Dra. Glauphesidente V. Diar
-Presidente CRM/AM 2636
-Endereço: Ruá Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br- Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-Data: 19 09/24
-Dandara
-Garência de Aposentador:
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) JOSE HERNANE QUEIROZ GUIMARAES
-CPF: 19271778200
-público, matrícula n° 025.205-OF
-lotado
-no
-(a):
-SEDUC
-unidade: E.E. PROF.RONALDO MARQUES SILVA
-ocupado do Cargo de: PROFESSOR
-e residente a: CHIBLY ABRAIN, N° 0
-CEP: 69000000
-Bairro: JAUARY
-cidade: ITACOATIARA/AMAZONAS telefone: (92)99143-2730
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 29/07/2024
-Requerente - C.N.
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-280643/2024
-Licença
-Período
-Data do exame
-Por 57 dias
-30/05/2024
-à 25/07/2024
-29/07/2024
-LAUDO
-Licença 
-CID
-F19.2, E11.3
-Decurso de Prazo
-Junta Especial
-Drof ivilusting Médica Zeimuran Hurails
-ORMAM 8621
-Socretaria de Estado Administração e Gesta
-JUNTA MÉDICO PERICIAL DO ESTADO
-Perito
-Perito
-Dra. GlPresidentede V. Dias
-Presidente CRM/AM 2630
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 328C Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-RECEBICO
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM - CEP 69050-030
-Data: 19 / 09 / 24
-Dandara
-Mench down
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) ALCINDO DE ANDRADE LIMA
-PF:40710440200
-público, matrícula n° 196.902-1D lotado no (a): SEDUC
-unidade: ESC EST JOSE C.M.MESTRINHO
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Olga Figueiredo, N° 3080
-CEP: 69103148
-Bairro: Tiradentes
-cidade: ITACOATIARA/AMAZONAS
-telefone: (92)99237-8168
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 23/08/2024
-Rice
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283181/2024
-Licença
-Período
-Data do exame
-Por 90 dias
-01/04/2024
-à 29/06/2024
-23/08/2024
-LAUDO
-Licença 
-CID
-K57, K40
-Decurso de Prazo
-Junta Especial
-Jamp
-Secretaria de Estado Administração e Gest
-Dr. José Levy Santos
-JUNTA MÉDICO e PERICIAL DO ESTADO
-Médico Perito
-CRM/AM 6416
-00000000000000 00000000000
-Dra. Glauna Mota de V. Dias
-Perito
-Perito
-Presirefresidente AM 263
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypitanga 328C Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM - CEP 69050-030
-RECEBIDO
-Data: 19/09/24
-Dandara
-Sucia compose
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) MARINETE GERALDA DA SILVA
-CPF:96111798200
-público, matrícula n° 205946-0B lotado no (a): SEDUC
-unidade: E.E. BEREZITH N.DA SILVA
-ocupado do Cargo de: PROFESSOR
-e residente a: Rua Adamastor de Figueiredo, N° 2645
-CEP: 69104208
-Bairro: Jauar I
-cidade: ITACOATIARA/AMAZONAS telefone: (92) 99178-7261
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 28/08/2024
-Present
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283639/2024
-Licença
-Período
-Data do exame
-Por 7 dias
-06/08/2024
-à 12/08/2024
-28/08/2024
-LAUDO
-CID
-Licença 
-Z35
-Decurso de Prazo
-Junta Especial
-Dra. Nihifar Medica Zeimaran 8621 Numan
-Secretaria de Estado Administração e Gesta.
-CRMAM
-JUNTA MÉDICO PERICIAL DO ESTADO
-6866600000
-Perito
-Perito
-Dra. V. Dies
-Presidented
-263
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3. Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 328C Parque Dez
-SECRETARIA DE
-www.sead.amgov.br Fone: 3182-2800
-Manaus-AM CEP 69050-030
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Data: 19/09/24
-Dandara
-curtuies de Appseptide
-AMAZONAS
-GOVERNO 00 ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) ADEMIR CORTEZ PINHEIRO
-CPF-43886442268
-público, matrícula n° 198.148-OF
-lotado no (a): SEDUC
-unidade: ESC. EST. CETI JORGE E. MARSKEL
-ocupado do Cargo de: PROFESSOR
-e residente a: VITORIA REGIA, N° 1931
-CEP: 69100000
-Bairro: JARDIM ADRIANA
-cidade: ITACOATIARA/AMAZONAS telefone: (92)9465-6209
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-James
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.B
-LAUDO MÉDICO N° 283003/2024
-Licença
-Período
-Data do exame
-Por 30 dias
-22/07/2024
-à 20/08/2024
-22/08/2024
-LAUDO
-Licença 
-CID
-M51.1
-Decurso de Prazo
-Junta Especial
-Dra. Nilufar simora
-Secretana de Estado Administração e Gesta
-Medica
-JUNTA MÉDICO PERICIAL DO ESTADO
-CRM/AM 8621
-Dra. Glaur Mota de V. Dias
-Perito
-Perito
-ProciniPresidente AM 263
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM Telefone (92)3082-6560
-Av. Mario Ypiranga. 3280 Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIDO
-Data: 19 / 09 / 24
-Dandara
-Generacia de Aposentadoris
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) DELSA ROSANA ZEFERINO
-CPF:01576017907
-público, matrícula n° 239.118-0A lotado no (a): SEDUC
-unidade: EE PROF. VICENTE G M LIMA
-ocupado do Cargo de: PEDAGOGO
-e residente a: Rua Raimundo Antônio Correa, N°49
-CEP: 69101158
-Bairro: Iraci
-cidade: ITACOATIARA/AMAZONAS telefone: (92) 99111-6462
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 23/08/2024
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283215/2024
-Licença
-Período
-Data do exame
-Por 30 dias
-03/08/2024
-à 01/09/2024
-23/08/2024
-LAUDO
-Licença 
-CID F41.2
-Decurso de Prazo
-Junta Especial
-Tamp
-Dr. José Levy Santos
-Médico Perito
-Secretaria de Estado Administração e Gestã
-CRM/ 6416
-JUNTA MÉDICO - PERIOIAL DO ESTADO
-Perito
-Perito
-Dra. Glaur Presidente- Dias
-Presidente CRM/AM 2636
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 3280 Parque Dez
-SECRETARIA DE
-www.sead.amgov.br Fone 3182-2800
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-Data: 19 / 09 / 24
-Dandara
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) ZIZITA MORAES DA ROCHA MAGALHAES
-CPF:46377492200
-público, matrícula n° 163.774-6A lotado no (a): SEDUC
-unidade: UNID EDUCACIONAL DE SANTO ANTO
-ocupado do Cargo de: AUX. DE SERV. GERAIS
-e residente a: JOSE BRITO BRAGA, N° 0
-CEP: 69680000
-Bairro: SANTA ETELVINA
-cidade: SANTO ANTÔNIO DO Icá/AMAZONélefone: 00
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-Deep
-Requérente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283017/2024
-Licença
-Período
-Data do exame
-Por 14 dias
-22/07/2024
-à 04/08/2024
-22/08/2024
-LAUDO
-Licença 
-CID Z10.0
-Decurso de Prazo
-Junta Especial
-Dra Villufor Zormarani Nuran
-Secretaria de Estado Administração e Gesta
-Médica
-JUNTA MÉDICO PERICIAL DO ESTADO
-CRMAM 8621
-Dra Gluxra Mota de V. Dias
-Perito
-Perito
-Pre Presidente
-M/AM 263
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM Telefone (92)3082-6560
-Av. Mario Ypiranga. 3280 Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone: 3182-2800
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-Data: 19 / 09 / 24
-Dandara
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) TARCIANE DACIO DE SOUZA
-CPF: 83474803204
-público, matrícula n° 207.099-5B lotado no (a): SEDUO
-unidade: PRE ESCOLA EDUARDO RIBEIRO EF
-ocupado do Cargo de: PROFESSOR
-e residente a: ET SAO SALVADOR , N° 0
-CEP: 69680000
-Bairro: CAMPINAS
-cidade: SANTO ANTÔNIO DO Içá/AMAZONélefone: 00
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-Dave
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-282998/2024
-Licença
-Período
-Data do exame
-Por 15 dias
-16/07/2024
-à 30/07/2024
-22/08/2024
-LAUDO
-Licença 
-CID Z00,8
-Decurso de Prazo
-Junta Especial
-and
-Dra. Milufa Nuters
-Médica
-Socretaria de Estacio/Administração e Gesta
-CRMAM 3621
-JUNTAMEDICO PERICIAL DO ESTADO
-Perito
-Perito
-Dra. GlPresidente de V. 263 Dias
-Presidente
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3. Parque Residencial Manaus (Prosamim) no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga 328C Parque Dez
-SECRETARIA DE
-www.sead.am.gov.br Fone 3182-2800
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-Data: 19/09/24
-Dandara
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) MARCIO DA SILVA SALDANHA
-CPF: 01182154263
-público, matrícula n° 259.061-1A lotado no (a): SEDUC
-unidade: PRE ESCOLAR EDUARDO RIBEIRO
-ocupado do Cargo de: PEDAGOGO
-e residente a: DUQUE DE CAXIAS, N° 0
-CEP: 69680000
-Bairro: ALVARO MAIA
-cidade: SANTO ANTÔNIO DO IçáMAZONelofone: (097) 991617610
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-Dieee
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283179/2024
-Licença
-Período
-Data do exame
-Por 10 dias
-08/07/2024
-à 17/07/2024
-22/08/2024
-LAUDO
-Licença 
-CID
-H10.3
-Decurso de Prazo
-Junta Especial
-Name
-Dr. José Levy Santos
-acretaria de Estado Agministração e Gesta,
-Médico Perito
-JUNTAMÉDICO . PERICIAL DO ESTADO
-CRM/AM 6416
-00000000000000000
-Perito
-Perito
-Dra. Glaura Dias
-Dresidente - Presidente36
-Endereço: Rua Igarapé de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. Mario Ypiranga, 3280 Parque Dez
-SECRETARIA DE
-www.sead.amgov.br Fone 3182-2800
-RECEBIDO
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM - CEP 69050-030
-Data: 19 / 09 / 24
-Dandosa
-AMAZONAS
-GOVERNO DO ESTADO
-JUNTA MÉDICA - PERICIAL DO ESTADO
-A Junta Médica Pericial do Estado
-servidor(a) MARICELIA CARVALHO AMARAL
-CPF: 01619122227
-público, matrícula n° 239.016-7A lotado no (a): SEDUC
-unidade: ESC 1 G STO ANTONIO EFETIVOS
-ocupado do Cargo de: MERENDEIRA
-e residente a: CM VILA CARVALHO , N° 528
-CEP: 69000000
-Bairro: ZONA RURAL
-cidade: SANTO ANTÔNIO DO Içá/AMAZONelofone: (92)98412-5322
-de
-acordo com o atestado em anexo, vem perante essa Junta Médica Pericial do Estado requerer:
-LICENÇA MÉDICA /EST/HPI/SIGED
-Data 22/08/2024
-Due
-Requerente - C.I.N°
-Ag. Setor de Pessoal
-Para uso exclusivo da J.M.P.E
-LAUDO MÉDICO N°
-283119/2024
-Licença
-Período
-Data do exame
-Por 15 dias
-01/07/2024
-à 15/07/2024
-22/08/2024
-LAUDO
-Licença 
-CID
-Z76.3
-Decurso de Prazo
-Junta Especial
-Jamp
-Dr. José Levy Santos
-Gocretaria de Estado Administração e Gestà
-Médico Perito
-JUNTA MÉDICO o PERICIAL DO ESTADO
-CRM/AM 6416
-Perito
-Perito
-Dra. V. Dias
-2636
-Endereço: Rua lgarapó de Manaus, s/n°, Quadra 3, Parque Residencial Manaus (Prosamim), no antigo prédio onde
-funcionava a sede do Prosamim, Centro, Manaus-AM. Telefone (92)3082-6560
-Av. MarioYpiranga.3280 Parque Dez
-SECRETARIA DE
-www.sead.am.govbr.-Fone:3182-2800
-ADMINISTRAÇÃO E GESTÃO
-Manaus-AM CEP 69050-030
-RECEBIBO
-Dats:
-19 / 09 / 24
-Dandara
-Servicia
-      </textarea>
+    <textarea id="dataInput" rows="15" placeholder="Cole os dados brutos aqui ou carregue um arquivo de texto (.txt)."></textarea>
 
     <input type="text" id="outputFilename" placeholder="Nome do arquivo de saída (sem extensão)">
 
     <div class="button-group">
       <button onclick="processAndPreviewData()" aria-label="Processar e pré-visualizar dados">Processar e Pré-visualizar</button>
-      <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Exportar para Excel</button>
+      <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Todos</button>
+      <button onclick="exportCapitalToExcel()" aria-label="Exportar somente dados de Manaus">Capital</button>
+      <button onclick="exportInteriorToExcel()" aria-label="Exportar dados do Interior">Interior</button>
+      <button onclick="exportLicençasVigentes()" aria-label="Exportar licenças vigentes">Licenças Vigentes</button>
+      <button onclick="exportVencidas()" aria-label="Exportar licenças vencidas">Licenças Vencidas</button>
+
       <button id="downloadErrorReport" style="display: none;" onclick="downloadErrorReport()" aria-label="Baixar relatório de dados não processados">Baixar Relatório de Erros</button>
     </div>
 
@@ -1132,168 +177,355 @@ Servicia
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-  
+
   <script>
     function updateFilename() {
-        const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        
-        const filename = `LAUDO_${day}.${month}.${year}_${hours}H${minutes}M`;
-        document.getElementById("outputFilename").value = filename; 
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+
+      const filename = `LAUDO_${day}.${month}.${year}_${hours}H${minutes}M`;
+      document.getElementById("outputFilename").value = filename;
     }
 
     let processedData = [];
 
     function loadFile(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            document.getElementById("dataInput").value = e.target.result;
-        }
-        
-        reader.readAsText(file);
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        document.getElementById("dataInput").value = e.target.result;
+      };
+
+      reader.readAsText(file);
     }
 
     function processAndPreviewData() {
-        let rawData = document.getElementById("dataInput").value;
-        let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
-        processedData = [];
+      let rawData = document.getElementById("dataInput").value;
+      let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
+      processedData = [];
 
-        // Atualize o cabeçalho para incluir as novas colunas
-        processedData.push([
-            "Nome_Servidor", "Matrícula", "Dígito", "Letra", "Lotado", "Cargo",
-            "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo", 
-            "LAUDO MÉDICO N°", "Período_Licença", "Dia_Inicio", "Mes_Inicio", 
-            "Ano_Inicio", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", 
-            "Tipo_Licença", "Motivo", 
-            "Data_Final_Unificada", "Reexaminar", "Reassumir", "Prorrogacao"
-        ]);
+      // Adiciona cabeçalhos apenas uma vez
+      processedData.push([
+        "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+        "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
+        "numero", "dias_licenca", "dia_inicio", "mes_inicio",
+        "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
+        "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+      ]);
 
-        entries.forEach(entry => {
-            let row = new Array(25).fill(""); // Atualize para 25 colunas
+      entries.forEach(entry => {
+        let row = new Array(25).fill(""); // Atualize para 25 colunas
 
-            row[0] = entry.match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+público,)/)?.[1]?.trim() || "";
+        row[0] = entry.match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+público,)/)?.[1]?.trim() || "";
 
-            let matriculaMatch = entry.match(/matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
-            if (matriculaMatch) {
-                row[1] = matriculaMatch[1].replace(/\./g, "") || "";
-                row[2] = matriculaMatch[2] || "";
-                row[3] = matriculaMatch[3] || "";
-            }
+        let matriculaMatch = entry.match(/matrícula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
+        if (matriculaMatch) {
+          row[1] = matriculaMatch[1].replace(/\./g, "") || "";
+          row[2] = matriculaMatch[2] || "";
+          row[3] = matriculaMatch[3] || "";
+        }
 
-            row[4] = entry.match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-            row[5] = entry.match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-            row[6] = entry.match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
-            row[7] = entry.match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+        row[4] = entry.match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+        row[5] = entry.match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+        row[6] = entry.match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
+        row[7] = entry.match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
-            let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
-            if (dataLaudoMatch) {
-                row[8] = dataLaudoMatch[1]; // Dia
-                row[9] = dataLaudoMatch[2]; // Mês
-                row[10] = dataLaudoMatch[3]; // Ano
-            }
+        let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
+        if (dataLaudoMatch) {
+          row[8] = dataLaudoMatch[1]; // Dia
+          row[9] = dataLaudoMatch[2]; // Mês
+          row[10] = dataLaudoMatch[3]; // Ano
+        }
 
-            let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
-            if (laudoMatch) {
-                row[11] = `${laudoMatch[1]}/${laudoMatch[2]}`;
-            }
+        let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\/(\d{4})/);
+        if (laudoMatch) {
+          row[11] = `${laudoMatch[1]}/${laudoMatch[2]}`;
+        }
 
-            let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
-            if (periodoMatch) {
-                row[12] = periodoMatch[1]; // Número de dias
-                row[13] = periodoMatch[2]; // Dia_Inicio
-                row[14] = periodoMatch[3]; // Mês_Inicio
-                row[15] = periodoMatch[4]; // Ano_Inicio
-                row[16] = periodoMatch[5]; // Dia_Fim
-                row[17] = periodoMatch[6]; // Mês_Fim
-                row[18] = periodoMatch[7]; // Ano_Fim
-            }
+        let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
+        if (periodoMatch) {
+          row[12] = periodoMatch[1]; // Número de dias
+          row[13] = periodoMatch[2]; // Dia_Inicio
+          row[14] = periodoMatch[3]; // Mês_Inicio
+          row[15] = periodoMatch[4]; // Ano_Inicio
+          row[16] = periodoMatch[5]; // Dia_Fim
+          row[17] = periodoMatch[6]; // Mês_Fim
+          row[18] = periodoMatch[7]; // Ano_Fim
+        }
 
-            let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-            row[19] = cidMatch ? cidMatch[1].trim() : "";
+        let cidMatch = entry.match(/CID\s+([\w., ]+)/);
+        row[19] = cidMatch ? cidMatch[1].trim() : "";
 
-            // Define o Tipo de Licença
-            row[20] = 5; // Sempre 5
+        // Define o Tipo de Licença
+        row[20] = 5; // Sempre 5
 
-            // Adiciona a lógica para definir o motivo
-            if (row[19] === "Z39.2") {
-                row[21] = 4; // Motivo para Z39.2
-            } else if (row[19] === "Z76.3") {
-                row[21] = 24; // Motivo para Z76.3
-            } else {
-                row[21] = 1; // Para qualquer outro CID
-            }
+        // Adiciona a lógica para definir o motivo
+        if (row[19] === "Z39.2") {
+          row[21] = 4; // Motivo para Z39.2
+        } else if (row[19] === "Z76.3") {
+          row[21] = 24; // Motivo para Z76.3
+        } else {
+          row[21] = 1; // Para qualquer outro CID
+        }
 
-            // Adiciona as novas colunas
-            row[22] = `${row[16]}/${row[17]}/${row[18]}`; // Data Final Unificada (Dia_Fim/Mês_Fim/Ano_Fim)
+        // Adiciona as novas colunas
+        row[22] = `${row[16]}/${row[17]}/${row[18]}`; // Data Final Unificada (Dia_Fim/Mês_Fim/Ano_Fim)
 
-            row[23] = "N"; // Reexaminar
-            row[24] = "S"; // Reassumir
-            row[25] = "N"; // Prorrogação
+        row[23] = "S"; // Reexaminar
+        row[24] = "S"; // Reassumir
+        row[25] = "N"; // Prorrogação
 
-            processedData.push(row);
-        });
+        processedData.push(row);
+      });
 
-        updatePreview();
+      updatePreview();
 
-        let status = document.getElementById('status');
-        status.textContent = "Dados processados com sucesso! Pronto para exportar.";
-        status.className = 'success';
-        
-        updateFilename();
+      let status = document.getElementById('status');
+      status.textContent = "Dados processados com sucesso! Pronto para exportar.";
+      status.className = 'success';
+
+      updateFilename();
     }
 
     function updatePreview() {
-        let preview = document.getElementById('dataPreview');
-        preview.innerHTML = '';
-        
-        let table = document.createElement('table');
-        table.className = 'preview-table';
-        
-        let headerRow = table.insertRow();
-        processedData[0].forEach(header => {
-            let th = document.createElement('th');
-            th.textContent = header;
-            headerRow.appendChild(th);
+      let preview = document.getElementById('dataPreview');
+      preview.innerHTML = '';
+
+      let table = document.createElement('table');
+      table.className = 'preview-table';
+
+      let headerRow = table.insertRow();
+      processedData[0].forEach((header) => {
+        let th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+
+      for (let i = 1; i < processedData.length; i++) {
+        let row = table.insertRow();
+        processedData[i].forEach((cell, j) => {
+          let td = row.insertCell();
+          td.textContent = cell; // Preencher normalmente sem valores fixos
+
+          // Cria uma célula editável
+          td.contentEditable = true; // Torna a célula editável
+
+          // Adiciona um listener para salvar as edições
+          td.addEventListener('blur', () => {
+            processedData[i][j] = td.textContent; // Salva a edição no array
+          });
         });
-        
-        for (let i = 1; i < processedData.length; i++) {
-            let row = table.insertRow();
-            processedData[i].forEach(cell => {
-                let td = row.insertCell();
-                td.textContent = cell; // Preencher normalmente sem valores fixos
-            });
-        }
-        
-        preview.appendChild(table);
+      }
+
+      preview.appendChild(table);
     }
 
     function exportToExcel() {
-        if (processedData.length === 0) {
-            alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
-            return;
-        }
+      if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+      }
 
-        let ws = XLSX.utils.aoa_to_sheet(processedData);
-        let wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Laudos Médicos");
+      let ws = XLSX.utils.aoa_to_sheet(processedData);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Laudos Médicos");
 
-        const filename = document.getElementById("outputFilename").value || "Laudos_Medicos";
-        XLSX.writeFile(wb, `${filename}.xlsx`);
+      const filename = document.getElementById("outputFilename").value || "Laudos_Medicos";
+      XLSX.writeFile(wb, `${filename}.xlsx`);
 
-        let status = document.getElementById('status');
-        status.textContent = "Arquivo Excel exportado com sucesso!";
-        status.className = 'success';
+      let status = document.getElementById('status');
+      status.textContent = "Arquivo Excel exportado com sucesso!";
+      status.className = 'success';
     }
 
-    window.onload = updateFilename;
-</script>
+    function exportCapitalToExcel() {
+      if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+      }
 
+      // Filtrar os dados para incluir apenas as linhas onde a cidade contém "MANAUS"
+      let capitalData = processedData.filter(row => row[6].toUpperCase().includes("MANAUS"));
+
+      if (capitalData.length === 0) {
+        alert("Nenhum dado encontrado para a cidade Manaus.");
+        return;
+      }
+
+      // Adicionar os cabeçalhos à capitalData
+      let headers = [
+        "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+        "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
+        "numero", "dias_licenca", "dia_inicio", "mes_inicio",
+        "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
+        "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+      ];
+
+      // Adiciona cabeçalhos na primeira linha
+      capitalData.unshift(headers);
+
+      let ws = XLSX.utils.aoa_to_sheet(capitalData);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Capital");
+
+      const filename = `Laudos_Capital_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      XLSX.writeFile(wb, filename);
+
+      let status = document.getElementById('status');
+      status.textContent = "Arquivo Excel para a capital exportado com sucesso!";
+      status.className = 'success';
+    }
+
+    function exportInteriorToExcel() {
+      if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+      }
+
+      // Filtrar os dados para incluir apenas as linhas onde a cidade NÃO contém "MANAUS"
+      let interiorData = processedData.filter(row => !row[6].toUpperCase().includes("MANAUS"));
+
+      if (interiorData.length === 0) {
+        alert("Nenhum dado encontrado fora da cidade Manaus.");
+        return;
+      }
+
+      // Adicionar os cabeçalhos à interiorData
+      let headers = [
+        "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+        "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
+        "numero", "dias_licenca", "dia_inicio", "mes_inicio",
+        "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
+        "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+      ];
+
+      // Verifica se o primeiro elemento é um cabeçalho e, se for, remove antes de adicionar o novo cabeçalho
+      if (interiorData[0][0] === "servidor") {
+        interiorData.shift(); // Remove o cabeçalho atual
+      }
+
+      // Adiciona cabeçalhos na primeira linha
+      interiorData.unshift(headers);
+
+      let ws = XLSX.utils.aoa_to_sheet(interiorData);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Interior");
+
+      const filename = `Laudos_Interior_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      XLSX.writeFile(wb, filename);
+
+      let status = document.getElementById('status');
+      status.textContent = "Arquivo Excel para o interior exportado com sucesso!";
+      status.className = 'success';
+    }
+
+    function exportLicençasVigentes() {
+      if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+      }
+
+      // Obtém a data atual
+      const today = new Date();
+
+      // Filtrar os dados para incluir apenas as linhas onde a data_final é maior ou igual à data atual
+      let licencasVigentes = processedData.filter(row => {
+        // A data está na coluna 22
+        const dataFinal = row[22]; // Obtém a data da coluna "data_final"
+        const [dia, mes, ano] = dataFinal.split('/').map(Number); // Separa a data em partes
+        const dataRow = new Date(ano, mes - 1, dia); // Cria um objeto Date para a data da linha
+        return dataRow >= today; // Compara a data da linha com a data atual
+      });
+
+      if (licencasVigentes.length === 0) {
+        alert("Nenhuma licença vigente encontrada.");
+        return;
+      }
+
+      // Adicionar os cabeçalhos à licencasVigentes
+      let headers = [
+        "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+        "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
+        "numero", "dias_licenca", "dia_inicio", "mes_inicio",
+        "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
+        "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+      ];
+
+      // Adiciona cabeçalhos na primeira linha
+      licencasVigentes.unshift(headers);
+
+      let ws = XLSX.utils.aoa_to_sheet(licencasVigentes);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Licenças Vigentes");
+
+      const filename = `Licencas_Vigentes_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      XLSX.writeFile(wb, filename);
+
+      let status = document.getElementById('status');
+      status.textContent = "Arquivo Excel para licenças vigentes exportado com sucesso!";
+      status.className = 'success';
+    }
+
+
+
+    function exportVencidas() {
+  if (processedData.length === 0) {
+    alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+    return;
+  }
+
+  // Obtém a data atual
+  const today = new Date();
+  
+  // Filtrar os dados para incluir apenas as linhas onde a data_final é menor que a data atual
+  let licencasVencidas = processedData.filter(row => {
+    // A data está na coluna 22
+    const dataFinal = row[22]; // Obtém a data da coluna "data_final"
+    const [dia, mes, ano] = dataFinal.split('/').map(Number); // Separa a data em partes
+    const dataRow = new Date(ano, mes - 1, dia); // Cria um objeto Date para a data da linha
+    return dataRow < today; // Compara a data da linha com a data atual
+  });
+
+  if (licencasVencidas.length === 0) {
+    alert("Nenhuma licença vencida encontrada.");
+    return;
+  }
+
+  // Adicionar os cabeçalhos à licencasVencidas
+  let headers = [
+    "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+    "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
+    "numero", "dias_licenca", "dia_inicio", "mes_inicio",
+    "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
+    "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+  ];
+
+  // Adiciona cabeçalhos na primeira linha
+  licencasVencidas.unshift(headers);
+
+  let ws = XLSX.utils.aoa_to_sheet(licencasVencidas);
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Licenças Vencidas");
+
+  const filename = `Licencas_Vencidas_${new Date().toISOString().slice(0, 10)}.xlsx`;
+  XLSX.writeFile(wb, filename);
+
+  let status = document.getElementById('status');
+  status.textContent = "Arquivo Excel para licenças vencidas exportado com sucesso!";
+  status.className = 'success';
+}
+
+
+
+
+    window.onload = updateFilename;
+
+  </script>
 
   <footer>
     <div class="footer-container">
@@ -1319,4 +551,5 @@ Servicia
     </div>
   </footer>
 </body>
+
 </html>
