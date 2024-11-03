@@ -137,3 +137,21 @@ footer {
     font-size: 12px;
     border-top: 1px solid #ccc;
 }
+
+.link-tutorial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-tutorial>a {
+    font-size: 16pt;
+    text-decoration: none;
+    color: rgb(84, 139, 184);
+}
+
+.link-tutorial>a:hover {
+    font-size: 16pt;
+    text-decoration: underline;
+    color: rgb(84, 139, 184);
+}
