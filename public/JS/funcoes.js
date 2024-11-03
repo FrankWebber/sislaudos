@@ -1,4 +1,4 @@
-let processedData = []; 
+let processedData = [];
 
 function processAndPreviewData() {
     let rawData = document.getElementById("dataInput").value;
@@ -10,10 +10,10 @@ function processAndPreviewData() {
         "Nome_Servidor", "Matrícula", "Digito", "Letra", "Lotado", "Cargo",
         "Cidade", "Telefone", "Dia_Laudo", "Mes_Laudo", "Ano_Laudo",
         "LAUDO MÉDICO N°", "Ano", "Dias", "Dia_Ini", "Mes_Ini",
-        "Ano_Ini", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID", 
+        "Ano_Ini", "Dia_Fim", "Mes_Fim", "Ano_Fim", "CID",
         "Tipo", "Reexaminar", "Reassumir", "Prorrogação"
     ];
-    
+
     processedData.push(header); // Adiciona o cabeçalho à planilha
 
     entries.forEach(entry => {
@@ -89,10 +89,10 @@ function processAndPreviewData() {
 function updatePreview() {
     let preview = document.getElementById('dataPreview');
     preview.innerHTML = '';
-    
+
     let table = document.createElement('table');
     table.className = 'preview-table';
-    
+
     // Adiciona o cabeçalho
     let headerRow = table.insertRow();
     processedData[0].forEach(header => {
@@ -100,7 +100,7 @@ function updatePreview() {
         th.textContent = header;
         headerRow.appendChild(th);
     });
-    
+
     // Adiciona as linhas de dados
     for (let i = 1; i < processedData.length; i++) {
         let row = table.insertRow();
@@ -109,7 +109,7 @@ function updatePreview() {
             td.textContent = cell;
         });
     }
-    
+
     preview.appendChild(table);
 }
 
@@ -128,10 +128,10 @@ function exportToExcel() {
 }
 
 // Função para carregar dados de um arquivo de texto
-document.getElementById('fileInput').addEventListener('change', function(e) {
+document.getElementById('fileInput').addEventListener('change', function (e) {
     let file = e.target.files[0];
     let reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         document.getElementById('dataInput').value = e.target.result;
     };
     reader.readAsText(file);
