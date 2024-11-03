@@ -174,5 +174,145 @@ function exportToExcel() {
     status.textContent = "Arquivo Excel exportado com sucesso!";
     status.className = 'success';
 }
+// Exporta apenas as linhas onde a cidade é "Manaus"
+function exportCapitalToExcel() {
+    if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+    }
+
+    // Filtra os dados para incluir apenas as linhas onde a cidade contém "MANAUS"
+    let capitalData = processedData.filter(row => row[6].toUpperCase().includes("MANAUS"));
+
+    if (capitalData.length === 0) {
+        alert("Nenhum dado encontrado para a cidade Manaus.");
+        return;
+    }
+
+    // Adiciona os cabeçalhos à capitalData
+    capitalData.unshift(processedData[0]);
+
+    let ws = XLSX.utils.aoa_to_sheet(capitalData);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Capital");
+
+    const filename = `Laudos_Capital_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+
+    let status = document.getElementById('status');
+    status.textContent = "Arquivo Excel para a capital exportado com sucesso!";
+    status.className = 'success';
+}
+
+// Exporta apenas as linhas onde a cidade não é "Manaus"
+function exportInteriorToExcel() {
+    if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+    }
+
+    // Filtra os dados para incluir apenas as linhas onde a cidade NÃO contém "MANAUS"
+    let interiorData = processedData.filter(row => !row[6].toUpperCase().includes("MANAUS"));
+
+    if (interiorData.length === 0) {
+        alert("Nenhum dado encontrado fora da cidade Manaus.");
+        return;
+    }
+
+    // Adiciona os cabeçalhos à interiorData
+    interiorData.unshift(processedData[0]);
+
+    let ws = XLSX.utils.aoa_to_sheet(interiorData);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Interior");
+
+    const filename = `Laudos_Interior_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+
+    let status = document.getElementById('status');
+    status.textContent = "Arquivo Excel para o interior exportado com sucesso!";
+    status.className = 'success';
+}
+
+// Exporta apenas as licenças vigentes, onde a data final é maior ou igual à data atual
+function exportLicencasVigentes() {
+    if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+    }
+
+    const today = new Date();
+    let licencasVigentes = processedData.filter((row, index) => {
+        // Ignora a linha de cabeçalho
+        if (index === 0) return false;
+
+        const dataFinal = row[22]; // A coluna "data_final"
+        if (!dataFinal) return false;
+
+        // Divide a data final e converte para um objeto Date
+        const [dia, mes, ano] = dataFinal.split('/').map(Number);
+        const dataRow = new Date(ano, mes - 1, dia);
+
+        // Compara a data da linha com a data de hoje
+        return dataRow >= today;
+    });
+
+    if (licencasVigentes.length === 0) {
+        alert("Nenhuma licença vigente encontrada.");
+        return;
+    }
+
+    // Adiciona os cabeçalhos ao início do array licencasVigentes
+    licencasVigentes.unshift(processedData[0]);
+
+    let ws = XLSX.utils.aoa_to_sheet(licencasVigentes);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vigentes");
+
+    const filename = `Licencas_Vigentes_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+
+    let status = document.getElementById('status');
+    status.textContent = "Arquivo Excel para licenças vigentes exportado com sucesso!";
+    status.className = 'success';
+}
+
+// Exporta apenas as licenças vencidas, onde a data final é menor que a data atual
+function exportVencidas() {
+    if (processedData.length === 0) {
+        alert("Nenhum dado processado. Por favor, processe os dados antes de exportar.");
+        return;
+    }
+
+    const today = new Date();
+    let licencasVencidas = processedData.filter(row => {
+        const dataFinal = row[22];
+        if (!dataFinal) return false;
+        const [dia, mes, ano] = dataFinal.split('/').map(Number);
+        const dataRow = new Date(ano, mes - 1, dia);
+        return dataRow < today;
+    });
+
+    if (licencasVencidas.length === 0) {
+        alert("Nenhuma licença vencida encontrada.");
+        return;
+    }
+
+    // Adiciona os cabeçalhos à licencasVencidas
+    licencasVencidas.unshift(processedData[0]);
+
+    let ws = XLSX.utils.aoa_to_sheet(licencasVencidas);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vencidas");
+
+    const filename = `Licencas_Vencidas_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+
+    let status = document.getElementById('status');
+    status.textContent = "Arquivo Excel para licenças vencidas exportado com sucesso!";
+    status.className = 'success';
+}
+
+
 
 window.onload = updateFilename;
