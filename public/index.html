@@ -8,6 +8,8 @@
   <link rel="icon" href="doctor.png" type="image/png">
   <link rel="stylesheet" href="./CSS/style-geral.css">
   <link rel="stylesheet" href="./CSS/styles.css">
+  <script src="./JS/textCorrector.js"></script>
+
 </head>
 
 <body>
@@ -79,10 +81,11 @@
       Gerêucia de Aposentadoria
       GECA MDG?/SEDUC
     </textarea>
-
+    <!-- ### Trabalhando nesse recurso  -->
     <input type="text" id="outputFilename" placeholder="Nome do arquivo de saída (sem extensão)">
 
     <div class="button-group">
+      <button class="btn_correctText" onclick="text_cleaner()">Corrigir texto</button>
       <button onclick="processAndPreviewData()" aria-label="Processar e pré-visualizar dados">Processar e
         Pré-visualizar</button>
       <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Todos</button>
@@ -105,6 +108,7 @@
   <div class="link-tutorial"><a href="./tutorialAWS.html" target="_blank">Clique aqui para ver um tutorial para gerar
       laudos.</a>
   </div>
+  <script src="./JS/buttonManager.js"></script>
   <script src="./JS/JS-Table.js"></script>
 </body>
 

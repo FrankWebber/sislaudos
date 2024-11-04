@@ -155,3 +155,7 @@ footer {
     text-decoration: underline;
     color: rgb(84, 139, 184);
 }
+
+.btn_correctText {
+    background-color: #00a093;
+}
