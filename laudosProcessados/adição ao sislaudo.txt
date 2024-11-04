@@ -1,0 +1,1 @@
+adicionar butão python co, finalidade de remover traços, pontos, acentos e quaisquer outras coisas que não sejam numeros ou letras. deixando assim o texto mais limpo e fácil de ser lido

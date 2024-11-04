@@ -30,7 +30,7 @@ Por 90 dias
 à 16/10/2024
 09/09/2024
 LAUDO
-Licença Negada
+
 CID M25.5, M65
 Decurso de Prazo
 Junta Especial
@@ -90,7 +90,7 @@ Por 30 dias
 19/09/2024
 LAUDO
 CID
-Licença Negada
+
 M54.5
 Decurso de Prazo
 Junta Especial
@@ -145,7 +145,7 @@ Por 60 dias
 16/09/2024
 LAUDO
 CID F41.0
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 Secretarin de Estado de Administração e Gestão SEAD
@@ -203,7 +203,7 @@ Por 157 dias
 à 13/11/2024
 27/09/2024
 LAUDO
-Licença Negada
+
 CID
 Z36
 Decurso de Prazo
@@ -260,7 +260,7 @@ Por 14 dias
 à 21/08/2024
 02/09/2024
 LAUDO
-Licença Negada
+
 CID
 Z54.0
 Decurso de Prazo
@@ -320,7 +320,7 @@ Por 60 dias
 à 07/11/2024
 01/10/2024
 LAUDO
-Licença Negada
+
 CID F43.2
 Decurso de Prazo
 Junta Especial
@@ -378,7 +378,7 @@ Por 90 dias
 à 07/12/2024
 19/09/2024
 LAUDO
-Licença Negada
+
 CID F43.2
 Decurso de Prazo
 Junta Especial
@@ -439,7 +439,7 @@ Por 30 dias
 24/09/2024
 LAUDO
 CID F32
-Licença Negada
+
 NECESSÁRIO APRESENTAÇÃO DE PARECER ESPECIALIZADO E EXAMES EM CASO
 Decurso de Prazo
 DE RENOVAÇÃO DE LICENÇA MÉDICA.
@@ -498,7 +498,7 @@ Por 60 dias
 12/01/2023
 LAUDO
 CID
-Licença Negada
+
 125
 Decurso de Prazo
 Junta Especial
@@ -555,7 +555,7 @@ Por 120 dias
 à 18/12/2023
 09/01/2024
 LAUDO
-Licença Negada
+
 CID
 120,150
 Decurso de Prazo
@@ -617,7 +617,7 @@ Por 180 dias
 03/08/2022
 LAUDO
 CID 121.120
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 RECRETARIA DE ESTADO DE ADMINISTRAÇÃO
@@ -675,7 +675,7 @@ Por 78 dias
 13/05/2022
 LAUDO
 CID
-Licença Negada
+
 M22, M23, M25.5
 Decurso de Prazo
 Junta Especial
@@ -733,7 +733,7 @@ Por 40 dias
 à 10/06/2023
 13/07/2023
 LAUDO
-Licença Negada
+
 CID 120.9, 150, 110
 Decurso de Prazo
 Junta Especial
@@ -791,7 +791,7 @@ Por 90 dias
 à 02/05/2023
 13/03/2023
 LAUDO
-Licença Negada
+
 CID 120.9
 Decurso de Prazo
 Junta Especial
@@ -853,7 +853,7 @@ Por 15 dias
 02/09/2024
 LAUDO
 CID
-Licença Negada
+
 K80
 Decurso de Prazo
 Junta Especial
@@ -926,7 +926,7 @@ Por 45 dias
 20/01/2023
 LAUDO
 CID
-Licença Negada
+
 M75.1, F43.0, F41.1
 Decurso de Prazo
 Junta Especial
@@ -986,7 +986,7 @@ Por 90 dias
 à 12/08/2023
 26/06/2023
 LAUDO
-Licença Negada
+
 CID F41.2, F43.0
 Decurso de Prazo
 Junta Especial
@@ -1042,7 +1042,7 @@ Por 90 dias
 05/10/2023
 LAUDO
 CID F41.2, F43.1
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 SECRETARIA BE SQFARG ESTADS RE is ADMINISTRAÇÃO E GESTÃO
@@ -1098,7 +1098,7 @@ Por 90 dias
 29/12/2023
 LAUDO
 Ferian Recena
-Licença Negada
+
 CID F32.2, F41.1, F43.1
 Decurso de Prazo
 Junta Especial
@@ -1158,7 +1158,7 @@ Por 90 dias
 12/03/2024
 LAUDO
 CID
-Licença Negada
+
 F41.1, F32.2
 Decurso de Prazo
 SECRETARIA JUNTAMEDICA-PERICIAL DELESTADO DE ADMINISTRAÇÃO E DOESTADO Macedo GESTA
@@ -1215,7 +1215,7 @@ Por 90 dias
 27/06/2024
 LAUDO
 CID F30.0
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 Secretaria de Estadu Auministração e Gesta.
@@ -1270,7 +1270,7 @@ Por 90 dias
 23/09/2024
 LAUDO
 CID F41.1
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 SECRETARIA DE ESTADO D ADMINISTRAÇÃO E GEST
@@ -1328,7 +1328,7 @@ Por 30 dias
 à 21/09/2024
 20/09/2024
 LAUDO
-Licença Negada
+
 CID
 F43.2
 Decurso de Prazo
@@ -1390,7 +1390,7 @@ Por 30 dias
 24/09/2024
 LAUDO
 CID
-Licença Negada
+
 F31.4
 Decurso de Prazo
 Junta Especial
@@ -1454,7 +1454,7 @@ Por 40 dias
 26/09/2024
 LAUDO
 CID
-Licença Negada
+
 M54.5
 Decurso de Prazo
 Junta Especial
@@ -1511,7 +1511,7 @@ Por 82 dias
 à 25/11/2024
 27/09/2024
 LAUDO
-Licença Negada
+
 CID
 F41, F41.0, F41.1
 Decurso de Prazo
@@ -1574,7 +1574,7 @@ Por 11 dias
 à 20/09/2024
 23/09/2024
 LAUDO
-Licença Negada
+
 CID
 Z76
 Decurso de Prazo
@@ -1633,7 +1633,7 @@ Por 1 dias
 LAUDO
 CID
 Z00
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 Secretaria de Estado de Administração e Gestão SEAD
@@ -1690,7 +1690,7 @@ Por 9 dias
 à 20/08/2024
 26/09/2024
 LAUDO
-Licença Negada
+
 CID Z76.3
 Decurso de Prazo
 Junta Especial
@@ -1748,7 +1748,7 @@ Por 180 dias
 01/08/2024
 LAUDO
 CID G12
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 Secretaria de Estado de Administraçãoe Gestão SEAD
@@ -1802,7 +1802,7 @@ Por 90 dias
 09/08/2024
 LAUDO
 CID G20
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 SECRETARIA DE ESTADO/DE ADMINISTRAÇÃO GES
@@ -1859,7 +1859,7 @@ Por 90 dias
 à 05/11/2024
 30/08/2024
 LAUDO
-Licença Negada
+
 CID F32.1, F41.1
 Decurso de Prazo
 02/10/24 individual v
@@ -1917,7 +1917,7 @@ Por 15 dias
 01713
 LAUDO
 se
-Licença Negada
+
 CID
 K80.1
 em
@@ -1977,7 +1977,7 @@ Por 21 dias
 à 04/09/2024
 10/09/2024
 LAUDO
-Licença Negada
+
 CID
 G93
 Decurso de Prazo
@@ -2031,7 +2031,7 @@ Por 5 dias
 à 12/07/2024
 13/08/2024
 LAUDO
-Licença Negada
+
 CID
 D25
 Decurso de Prazo
@@ -2084,7 +2084,7 @@ Por 30 dias
 à 28/09/2024
 24/09/2024
 LAUDO
-Licença Negada
+
 CID
 F32.9, F41
 Decurso de Prazo
@@ -2142,7 +2142,7 @@ Por 1 dias
 à 18/05/2023
 22/06/2023
 LAUDO
-Licença Negada
+
 CID
 J45
 Decurso de Prazo
@@ -2204,7 +2204,7 @@ Por 3 dias
 22/06/2023
 LAUDO
 CID
-Licença Negada
+
 Z00.6, J45
 Decurso de Prazo
 Junta Especial
@@ -2265,7 +2265,7 @@ Por 10 dias
 26/09/2024
 LAUDO
 CID M54.4
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 SECRETARIA DE ESTADO DE ADMINISTRAÇÃO E GEST
@@ -2321,7 +2321,7 @@ For 120 dias
 09/05/2024
 LAUDO
 CID
-Licença Negada
+
 141.132
 Decurso de Prazo
 SECRETARADE CHUND OF JOHNSTRUCAO
@@ -2370,7 +2370,7 @@ Por 10 dias
 à 24/07/2024
 19/08/2024
 LAUDO
-Licença Negada
+
 CID R10
 Decurso de Prazo
 Junta Especial
@@ -2432,7 +2432,7 @@ Por 180 dias
 à 20/01/2025
 19/08/2024
 LAUDO
-Licença Negada
+
 CID
 Z39.2
 Decurso de Prazo
@@ -2492,7 +2492,7 @@ Por 14 dias
 à 11/07/2024
 19/08/2024
 LAUDO
-Licença Negada
+
 CID
 R10
 Decurso de Prazo
@@ -2552,7 +2552,7 @@ Por 90 dias
 à 13/11/2024
 30/09/2024
 LAUDO
-Licença Negada
+
 CID M51.9
 Decurso de Prazo
 Junta Especial
@@ -2607,7 +2607,7 @@ Por 60 dias
 30/09/2024
 LAUDO
 CID T92.9, Z50.1
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 SECRETARIA DE ESTADO DE ADMINISTRAÇÃO E GESTÃO
@@ -2666,7 +2666,7 @@ Por 30 dias
 à 12/05/2024
 02/05/2024
 LAUDO
-Licença Negada
+
 CID F41.1
 Decurso de Prazo
 Junta Especial
@@ -2726,7 +2726,7 @@ Por 16 dias
 09/07/2024
 LAUDO
 CID
-Licença Negada
+
 Z54
 Decurso de Prazo
 Junta Especial
@@ -2783,7 +2783,7 @@ Por 30 dias
 à 13/06/2024
 28/05/2024
 LAUDO
-Licença Negada
+
 CID
 R32
 Decurso de Prazo
@@ -2849,7 +2849,7 @@ Por 90 dias
 à 30/10/2024
 02/09/2024
 LAUDO
-Licença Negada
+
 CID Z76.3
 Decurso de Prazo
 Junta Especial
@@ -2909,7 +2909,7 @@ Por 90 dias
 à 30/10/2024
 02/09/2024
 LAUDO
-Licença Negada
+
 CID Z76.3
 Decurso de Prazo
 Junta Especial
@@ -2966,7 +2966,7 @@ Por 50 dias
 à 16/10/2024
 26/09/2024
 LAUDO
-Licença Negada
+
 CID M75.4
 Decurso de Prazo
 Junta Especial
@@ -3023,7 +3023,7 @@ Por 45 dias
 à 01/10/2024
 16/09/2024
 LAUDO
-Licença Negada
+
 CID F43.1
 Decurso de Prazo
 Junta Especial
@@ -3086,7 +3086,7 @@ Por 3 dias
 19/09/2024
 LAUDO
 CID
-Licença Negada
+
 J06.9
 Decurso de Prazo
 Junta Especial
@@ -3145,7 +3145,7 @@ Por 120 dias
 16/09/2024
 LAUDO
 CID M23.2
-Licença Negada
+
 Decurso de Prazo
 Junta Especial
 Secretaria de Estado de Administração e Gestlio SEAD
@@ -3207,7 +3207,7 @@ Por 5 dias
 20/09/2024
 LAUDO
 CID
-Licença Negada
+
 B34.2
 Decurso de Prazo
 Secretaria de Estado de Administração e Gestlin - SEAD
@@ -3266,7 +3266,7 @@ Por 5 días
 20/09/2024
 LAUDO
 CID B34.2
-Licença Negada
+
 Decurso de Prazo
 Secretaria de Estado de Administração e Gestão SEAD
 Junta Especial
@@ -3323,7 +3323,7 @@ Por 120 dias
 à 12/02/2025
 30/09/2024
 LAUDO
-Licença Negada
+
 CID
 C50
 Decurso de Prazo
@@ -3380,7 +3380,7 @@ Por 120 dias
 à 20/12/2024
 15/07/2024
 LAUDO
-Licença Negada
+
 CID F31.7
 Decurso de Prazo
 Junta Especial
@@ -3440,7 +3440,7 @@ Por 120 dias
 à 29/11/2024
 30/09/2024
 LAUDO
-Licença Negada
+
 CID
 M65, M25.5, M71.8, M51
 Decurso de Prazo
@@ -3499,7 +3499,7 @@ Por 120 dias
 à 10/12/2024
 30/09/2024
 LAUDO
-Licença Negada
+
 CID
 M54.4
 Decurso de Prazo
@@ -3558,7 +3558,7 @@ Por 30 dias
 à 01/10/2024
 30/09/2024
 LAUDO
-Licença Negada
+
 CID F41.2
 Decurso de Prazo
 Junta Especial

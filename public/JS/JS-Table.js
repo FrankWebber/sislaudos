@@ -75,9 +75,9 @@ function processAndPreviewData() {
         }
 
         // Extrai o número do laudo médico
-        let laudoMatch = entry.match(/LAUDO MEDICO N°\s+(\d+)\/(\d{4})/);
+        let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
         if (laudoMatch) {
-            row[11] = `${laudoMatch[1]}/${laudoMatch[2]}`;
+            row[11] = laudoMatch[1];
         }
 
         // Extrai o período de licença
