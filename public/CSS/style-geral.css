@@ -42,8 +42,46 @@ textarea:focus {
 }
 
 .button-group {
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Define uma única coluna centralizada */
+    grid-template-rows: auto auto auto auto;
+    /* Quatro linhas para os botões */
+    gap: 10px;
+    justify-items: center;
+    /* Centraliza os itens horizontalmente */
+    align-items: center;
 }
+
+.correct-preview {
+    display: flex;
+    gap: 10px;
+    /* Espaço entre os botões dentro da div */
+}
+
+.Todos,
+.Regiao,
+.vigente-vencida {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+}
+
+.btn-tds {
+    width: 10rem;
+    padding: 20px;
+}
+
+.Regiao>button {
+    width: 15em;
+    padding: 20px;
+}
+
+.vigente-vencida>button {
+    width: 15rem;
+    padding: 20px;
+}
+
 
 button {
     padding: 10px 20px;
@@ -59,6 +97,9 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+
+
 
 /* Estilos para a tabela de preview */
 #dataPreview {

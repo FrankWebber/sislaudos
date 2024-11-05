@@ -85,14 +85,22 @@
     <input type="text" id="outputFilename" placeholder="Nome do arquivo de saída (sem extensão)">
 
     <div class="button-group">
-      <button class="btn_correctText" onclick="text_cleaner()">Corrigir texto</button>
-      <button onclick="processAndPreviewData()" aria-label="Processar e pré-visualizar dados">Processar e
-        Pré-visualizar</button>
-      <button onclick="exportToExcel()" aria-label="Exportar dados para Excel">Todos</button>
-      <button onclick="exportCapitalToExcel()" aria-label="Exportar somente dados de Manaus">Capital</button>
-      <button onclick="exportInteriorToExcel()" aria-label="Exportar dados do Interior">Interior</button>
-      <button onclick="exportLicencasVigentes()" aria-label="Exportar licenças vigentes">Licenças Vigentes</button>
-      <button onclick="exportVencidas()" aria-label="Exportar licenças vencidas">Licenças Vencidas</button>
+      <div class="correct-preview">
+        <button class="btn_correctText" onclick="text_cleaner()">Corrigir texto</button>
+        <button onclick="processAndPreviewData()" aria-label="Processar e pré-visualizar dados">Processar e
+          Pré-visualizar</button>
+      </div>
+      <div class="Todos">
+        <button class="btn-tds" onclick="exportToExcel()" aria-label="Exportar dados para Excel">Todos</button>
+      </div>
+      <div class="Regiao">
+        <button onclick="exportCapitalToExcel()" aria-label="Exportar somente dados de Manaus">Capital</button>
+        <button onclick="exportInteriorToExcel()" aria-label="Exportar dados do Interior">Interior</button>
+      </div>
+      <div class="vigente-vencida">
+        <button onclick="exportLicencasVigentes()" aria-label="Exportar licenças vigentes">Licenças Vigentes</button>
+        <button onclick="exportVencidas()" aria-label="Exportar licenças vencidas">Licenças Vencidas</button>
+      </div>
 
       <button id="downloadErrorReport" style="display: none;" onclick="downloadErrorReport()"
         aria-label="Baixar relatório de dados não processados">Baixar Relatório de Erros</button>
