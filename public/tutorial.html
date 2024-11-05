@@ -8,20 +8,25 @@
     <style>
         * {
             box-sizing: border-box;
-            font-size: 16pt;
+            font-size: 14pt;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             color: #333;
+            /* Azul escuro */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ECF0F1;
+            /* Cinza claro */
         }
 
         h3 {
             text-align: center;
-            margin: 20px 0;
+            color: #242525;
+            /* Azul vibrante */
         }
 
         .tutorial {
@@ -34,10 +39,12 @@
         .step-4,
         .step-5,
         .step-6 {
-            background-color: aliceblue;
-            border: 1px solid #ccc;
+            background-color: #EAF2F8;
+            /* Azul muito claro */
+            border: 1px solid #BDC3C7;
+            /* Cinza suave */
             box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
+            margin: 20px;
             border-radius: 5px;
             padding: 20px;
             transition: transform 0.3s ease;
@@ -50,10 +57,13 @@
         .step-5:hover,
         .step-6:hover {
             transform: scale(1.02);
+            border-color: #2980B9;
+            /* Azul vibrante */
         }
 
         #security {
-            border-color: red;
+            border-color: #E74C3C;
+            /* Vermelho suave */
         }
 
         li {
@@ -63,12 +73,14 @@
 
         a {
             text-decoration: none;
-            color: rgb(34, 45, 94);
+            color: #3498DB;
+            /* Azul médio */
         }
 
         a:hover {
             text-decoration: underline;
-            color: rgb(22, 59, 141);
+            color: #1A5276;
+            /* Azul mais escuro */
         }
 
         .checkbox {
@@ -85,7 +97,7 @@
         }
 
         .container-resources {
-            padding: 0 20px;
+            padding: 2px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -93,68 +105,76 @@
 
         footer {
             width: 100%;
-            max-width: 100vw;
-            /* Largura máxima */
-            margin: 0 auto;
-            /* Centraliza o footer */
-            background-color: rgb(81, 111, 139);
-            color: white;
+            background-color: #345777;
+            /* Azul vibrante */
+            color: #FFFFFF;
+            /* Texto branco */
             padding: 20px 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .footer-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            /* duas colunas */
-            grid-template-rows: 1fr 1fr;
-            /* duas linhas */
-            gap: 5px;
-            /* espaçamento entre as seções */
-            padding: 5px;
-            width: 100%;
-            /* Garante que o grid ocupe todo o espaço disponível */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
-
 
         .footer-section {
-            flex: 1 1 250px;
-            margin: 10px;
+            margin-bottom: 10px;
         }
 
         .footer-section h4 {
-            margin-top: 0;
-            color: #f0f0f0;
-        }
-
-        .footer-section p,
-        .footer-section ul,
-        .footer-section a,
-        .footer-bottom {
-            font-size: 18px;
+            margin: 0 0 10px;
         }
 
         .footer-section ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .footer-section ul li {
-            margin-bottom: 8px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            /* Alinha o texto ao centro verticalmente com a imagem */
         }
 
+        .footer-section ul li img {
+            width: 20px;
+            /* Ajusta o tamanho da imagem conforme necessário */
+            margin-right: 8px;
+            /* Espaço entre a imagem e o texto */
+            vertical-align: middle;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            /* Alinha o texto com a imagem dentro do link */
+        }
+
+        .footer-section ul li a:hover {
+            color: #fff;
+        }
+
+
         .footer-bottom {
+            grid-column: 1 / -1;
             text-align: center;
-            width: 100%;
-            margin-top: 10px;
             font-size: 14px;
-            color: #ccc;
+            color: #D5DBDB;
+            /* Cinza claro */
+            margin-top: 20px;
         }
 
         img {
             width: 2rem;
+        }
+
+        .linkAWS {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -234,45 +254,48 @@
         </div>
     </div>
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Sobre a Empresa</h4>
-                <p>EDU TECH INOVA LTDA (CNPJ: 49.977.892/0001-74)</p>
-                <p>Soluções educacionais e desenvolvimento de software sob encomenda.</p>
-                <p class="address">R. Delmiro Leão, 78 - Manaus, AM</p>
-            </div>
-            <div class="footer-section">
-                <h4>Nossa Equipe</h4>
-                <ul>
-                    <li><strong>Mauro Frank Lima</strong> - Desenvolvedor</li>
-                    <li><strong>Marcus André Lima</strong> - Analista de Sistemas</li>
-                    <li><strong>Roberto Araújo da Silva</strong> - Relações Públicas</li>
-                    <li><strong>Fábio Leda Cunha</strong> - Vendas</li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contate-nos</h4>
-                <ul>
-                    <li><img src="./img/whatsapp.png" alt=""></li>
-                    <li><img src="./img/instagram.png" alt=""></li>
-                    <li><img src="./img/linkedin.png" alt=""></li>
-                    <li><img src="./img/github.png" alt=""></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Recursos Adicionais</h3>
-                <p>Acesse a ferramenta de upload em massa para Textract da AWS através do link abaixo:</p>
-                <a href="https://us-west-2.console.aws.amazon.com/textract/home?region=us-west-2#/bulkupload/documentuploader"
-                    target="_blank">
-                    AWS Textract - Upload em Massa
-                </a>
-            </div>
+        <div class="footer-section">
+            <h4>Recursos Adicionais</h4>
+            <p>Acesse a ferramenta de upload em massa para Textract da AWS através desse <a
+                    href="https://us-west-2.console.aws.amazon.com/textract/home?region=us-west-2#/bulkupload/documentuploader">link</a>.
+            </p>
+        </div>
+        <div class="footer-section">
+            <h4>Sobre a empresa</h4>
+            <ul>
+                <li><a href="#">Nossa História</a></li>
+                <li><a href="#">Missão e Valores</a></li>
+                <li><a href="#">Carreiras</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contate-nos</h4>
+            <ul>
+                <li><a href="#">Suporte</a></li>
+                <li><a href="#"><img src="" alt="">Email</a></li>
+                <li><a href="#"><img src="./img/instagram.png" alt="Instagram">Instagram</a></li>
+                <li><a href="#"><img src="./img/github.png" alt="GitHub">GitHub</a></li>
+                <li><a href="#"><img src="./img/whatsapp.png" alt="Whatsapp">Whatsapp</a></li>
+                <li><a href="#"><img src="./img/linkedin.png" alt="LinkedIn">LinkedIn</a></li>
+                <li><a href="#">Localização</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Nossa Equipe</h4>
+            <ul>
+                <li>Mauro Frank Lima - Desenvolvedor</li>
+                <li>Marcus André Lima - Analista de Sistemas</li>
+                <li>Roberto Araújo da Silva - Relações Públicas</li>
+                <li>Fábio Leda Cunha- Vendas</li>
+            </ul>
+            <ul>
+                <li><a href="#">Suporte Técnico</a></li>
+            </ul>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.</p>
+            © 2024 EDU TECH INOVA LTDA. Todos os direitos reservados.
         </div>
     </footer>
-
 </body>
 
 </html>
