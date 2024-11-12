@@ -16,5 +16,5 @@ function text_cleaner() {
 
     // Atualiza a interface para confirmar a ação
     const status = document.getElementById("status");
-    status.textContent = "Texto formatado com sucesso!";
+    status.textContent = "Texto formatado com sucesso.";
 }
