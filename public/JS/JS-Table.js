@@ -53,7 +53,8 @@ function processAndPreviewData() {
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
 
         // Extrai a matrícula, dígito e letra
-        let matriculaMatch = normalizeString(entry).match(/matricula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
+        let matriculaMatch = normalizeString(entry).match(/matricula\s*n[ºo]?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/i);
+
         if (matriculaMatch) {
             row[1] = matriculaMatch[1].replace(/\./g, "") || "";
             row[2] = matriculaMatch[2] || "";
@@ -61,13 +62,14 @@ function processAndPreviewData() {
         }
 
         // Extrai unidade, cargo, cidade e telefone
-        row[4] = normalizeString(entry).match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[5] = normalizeString(entry).match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[6] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
+        row[4] = normalizeString(entry).match(/unidade:\s+(.+?)(?=\s|ocupado)/i)?.[1]?.trim() || "";
+        row[5] = normalizeString(entry).match(/Cargo\s+(?:de:|ocupado):?\s+(.+?)(?=\s|\n|ocupado)/i)?.[1]?.trim() || "";
+        row[6] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/i)?.[1]?.trim() || "";
         row[7] = normalizeString(entry).match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
         // Extrai a data do laudo
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
+
         if (dataLaudoMatch) {
             row[8] = dataLaudoMatch[1];
             row[9] = dataLaudoMatch[2];
@@ -75,13 +77,15 @@ function processAndPreviewData() {
         }
 
         // Extrai o número do laudo médico
-        let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
+        let laudoMatch = entry.match(/LAUDO\s+M[ÉE]DICO\s+N[º°]?\s*(\d+)/i);
+
         if (laudoMatch) {
             row[11] = laudoMatch[1];
         }
 
         // Extrai o período de licença
-        let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
+        let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a|até)\s+(\d{2})\/(\d{2})\/(\d{4})/i);
+
         if (periodoMatch) {
             row[12] = periodoMatch[1];
             row[13] = periodoMatch[2];
@@ -93,7 +97,8 @@ function processAndPreviewData() {
         }
 
         // Extrai o CID
-        let cidMatch = entry.match(/CID\s+([\w., ]+)/);
+        let cidMatch = entry.match(/CID\s+([\w., ]+)/i);
+
         row[19] = cidMatch ? cidMatch[1].trim() : "";
 
         // Define o Tipo de Licença e o Motivo
