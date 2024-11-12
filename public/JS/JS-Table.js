@@ -33,7 +33,8 @@ function normalizeString(str) {
 // Processa os dados e os exibe em uma pré-visualização
 function processAndPreviewData() {
     let rawData = document.getElementById("dataInput").value;
-    let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
+    let entries = rawData.split(/(?=GOVERNO DO ESTADO DO\s+AMAZONAS\s+JUNTA MÉDICA - PERICIAL DO ESTADO)/);
+
     processedData = [];
 
     // Adiciona cabeçalhos apenas uma vez
