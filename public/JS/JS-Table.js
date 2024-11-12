@@ -30,27 +30,13 @@ function normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function extractMatricula(entry) {
-    const matriculaMatch = normalizeString(entry).match(/matricula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
-    if (matriculaMatch) {
-        let matricula = matriculaMatch[1].replace(/\./g, "") || "";
-        let digito = matriculaMatch[2] || "";
-        let letra = matriculaMatch[3] || "";
-
-        // Substitui o dígito '0' por 'C' na matrícula
-        matricula = matricula.replace(/0/g, 'C');
-
-        return [matricula, digito, letra];
-    }
-    return ["", "", ""];
-}
-
 // Processa os dados e os exibe em uma pré-visualização
 function processAndPreviewData() {
     let rawData = document.getElementById("dataInput").value;
     let entries = rawData.split(/(?=AMAZONAS\s+GOVERNO DO ESTADO)/);
     processedData = [];
 
+    // Adiciona cabeçalhos apenas uma vez
     processedData.push([
         "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
         "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
@@ -59,17 +45,20 @@ function processAndPreviewData() {
         "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
     ]);
 
+    // Processa cada entrada separadamente
     entries.forEach(entry => {
         let row = new Array(26).fill("");
 
         // Extrai o nome do servidor
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
 
-        // Extrai a matrícula, dígito e letra com o ajuste de '0' para 'C'
-        const [matricula, digito, letra] = extractMatricula(entry);
-        row[1] = matricula;
-        row[2] = digito;
-        row[3] = letra;
+        // Extrai a matrícula, dígito e letra
+        let matriculaMatch = normalizeString(entry).match(/matricula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
+        if (matriculaMatch) {
+            row[1] = matriculaMatch[1].replace(/\./g, "") || "";
+            row[2] = matriculaMatch[2] || "";
+            row[3] = matriculaMatch[3] || "";
+        }
 
         // Extrai unidade, cargo, cidade e telefone
         row[4] = normalizeString(entry).match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
@@ -121,12 +110,15 @@ function processAndPreviewData() {
         processedData.push(row);
     });
 
+    // Atualiza a pré-visualização
     updatePreview();
 
+    // Atualiza o status
     let status = document.getElementById('status');
     status.textContent = "Dados processados com sucesso! Pronto para exportar.";
     status.className = 'success';
 
+    // Atualiza o nome do arquivo
     updateFilename();
 }
 
