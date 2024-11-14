@@ -40,15 +40,14 @@ function processAndPreviewData() {
     // Adiciona cabeçalhos apenas uma vez
     processedData.push([
         "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
-        "cidade", "telefone", "dia_exame", "mes_exame", "ano_exame",
-        "numero", "dias_licenca", "dia_inicio", "mes_inicio",
-        "ano_inicio", "dia_fim", "mes_fim", "ano_fim", "cid",
-        "tipo", "motivo", "data_final", "reexaminar", "reassumir", "prorrogacao"
+        "cidade", "telefone", "data_exame", "numero", "dias_licenca",
+        "data_inicio", "data_fim", "cid", "tipo", "motivo", "data_final",
+        "reexaminar", "reassumir", "prorrogacao"
     ]);
 
     // Processa cada entrada separadamente
     entries.forEach(entry => {
-        let row = new Array(26).fill("");
+        let row = new Array(19).fill("");
 
         // Extrai o nome do servidor
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
@@ -67,45 +66,42 @@ function processAndPreviewData() {
         row[6] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
         row[7] = normalizeString(entry).match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
-        // Extrai a data do laudo
+        // Extrai a data do laudo e combina em um formato "ddmmyyyy"
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (dataLaudoMatch) {
-            row[8] = dataLaudoMatch[1];
-            row[9] = dataLaudoMatch[2];
-            row[10] = dataLaudoMatch[3];
+            // Combina dia, mês e ano em um único campo "data_exame" no formato "ddmmyyyy"
+            row[8] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
         }
 
-        // Extrai o número do laudo médico
+        // Extrai o número do laudo médico e insere na posição correta
         let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
         if (laudoMatch) {
-            row[11] = laudoMatch[1];
+            row[9] = laudoMatch[1];
         }
 
-        // Extrai o período de licença
+        // Extrai o período de licença e combina as datas de início e fim no formato "ddmmyyyy"
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
-            row[12] = periodoMatch[1];
-            row[13] = periodoMatch[2];
-            row[14] = periodoMatch[3];
-            row[15] = periodoMatch[4];
-            row[16] = periodoMatch[5];
-            row[17] = periodoMatch[6];
-            row[18] = periodoMatch[7];
+            row[10] = periodoMatch[1]; // dias_licenca
+            // Combina dia, mês e ano de início em "data_inicio" no formato "ddmmyyyy"
+            row[11] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`;
+            // Combina dia, mês e ano de fim em "data_fim" no formato "ddmmyyyy"
+            row[12] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`;
         }
 
         // Extrai o CID
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-        row[19] = cidMatch ? cidMatch[1].trim() : "";
+        row[13] = cidMatch ? cidMatch[1].trim() : "";
 
         // Define o Tipo de Licença e o Motivo
-        row[20] = 5; // Tipo fixo como 5
-        row[21] = (row[19] === "Z39.2") ? 4 : (row[19] === "Z76.3") ? 24 : 1;
+        row[14] = 5; // Tipo fixo como 5
+        row[15] = (row[13] === "Z39.2") ? 4 : (row[13] === "Z76.3") ? 24 : 1;
 
         // Data Final, Reexaminar, Reassumir, e Prorrogação
-        row[22] = `${row[16]}/${row[17]}/${row[18]}`;
-        row[23] = "S";
-        row[24] = "S";
-        row[25] = "N";
+        row[16] = row[12]; // Usa data_fim como data_final
+        row[17] = "S";
+        row[18] = "S";
+        row[19] = "N";
 
         // Adiciona a linha de dados processada
         processedData.push(row);
