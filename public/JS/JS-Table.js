@@ -235,12 +235,19 @@ function exportInteriorToExcel() {
 }
 
 function parseDate(ddmmyyyy) {
+    // Verifica se ddmmyyyy é uma string e possui o comprimento correto (8 caracteres para "ddmmyyyy")
+    if (typeof ddmmyyyy !== 'string' || ddmmyyyy.length !== 8) {
+        console.error("Formato inválido de data:", ddmmyyyy);
+        return null; // Retorna null em caso de formato inválido
+    }
+
     const day = ddmmyyyy.slice(0, 2);
-    const month = ddmmyyyy.slice(2, 4) - 1;
+    const month = ddmmyyyy.slice(2, 4) - 1; // Subtrai 1, pois os meses no JavaScript começam em 0
     const year = ddmmyyyy.slice(4);
+
     return new Date(year, month, day);
 }
-
+s
 // Exporta apenas as licenças vigentes, onde a data final é maior ou igual à data atual
 function exportLicencasVigentes() {
     if (processedData.length === 0) {
