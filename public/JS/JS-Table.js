@@ -30,24 +30,22 @@ function normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// Processa os dados e os exibe em uma pré-visualização
 function processAndPreviewData() {
     let rawData = document.getElementById("dataInput").value;
     let entries = rawData.split(/(?=GOVERNO DO ESTADO DO\s+AMAZONAS\s+JUNTA MÉDICA - PERICIAL DO ESTADO)/);
 
     processedData = [];
 
-    // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_letivo"
+    // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_letivo" e "código_especial"
     processedData.push([
         "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
         "cidade", "telefone", "data_exame", "numero", "dias_licenca",
         "data_inicio", "data_fim", "ano_letivo", "cid", "tipo", "motivo",
-        "data_final", "reexaminar", "reassumir", "prorrogacao"
+        "data_final", "reexaminar", "reassumir", "prorrogacao", "codigo_cid"
     ]);
 
-    // Processa cada entrada separadamente
     entries.forEach(entry => {
-        let row = new Array(20).fill("");
+        let row = new Array(21).fill("");
 
         // Extrai o nome do servidor
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
@@ -72,7 +70,7 @@ function processAndPreviewData() {
             row[8] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
         }
 
-        // Extrai o número do laudo médico e insere na posição correta
+        // Extrai o número do laudo médico
         let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
         if (laudoMatch) {
             row[9] = laudoMatch[1];
@@ -82,13 +80,9 @@ function processAndPreviewData() {
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
             row[10] = periodoMatch[1]; // dias_licenca
-            // Combina dia, mês e ano de início em "data_inicio" no formato "ddmmyyyy"
-            row[11] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`;
-            // Combina dia, mês e ano de fim em "data_fim" no formato "ddmmyyyy"
-            row[12] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`;
-
-            // Extrai o ano da data_fim e armazena em "ano_letivo"
-            row[13] = periodoMatch[7]; // ano_fim
+            row[11] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`; // data_inicio
+            row[12] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`; // data_fim
+            row[13] = periodoMatch[7]; // ano_letivo
         }
 
         // Extrai o CID
@@ -105,6 +99,15 @@ function processAndPreviewData() {
         row[19] = "S";
         row[20] = "N";
 
+        // Condição para definir o "código_especial"
+        if (row[14] === "Z76.3") {
+            row[21] = "14012";
+        } else if (row[14] === "Z39.2") {
+            row[21] = "13734";
+        } else {
+            row[21] = "1";
+        }
+
         // Adiciona a linha de dados processada
         processedData.push(row);
     });
@@ -120,6 +123,8 @@ function processAndPreviewData() {
     // Atualiza o nome do arquivo
     updateFilename();
 }
+
+
 
 
 // Atualiza a pré-visualização dos dados em uma tabela HTML
