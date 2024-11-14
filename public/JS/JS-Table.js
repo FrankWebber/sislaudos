@@ -231,6 +231,13 @@ function exportInteriorToExcel() {
     status.className = 'success';
 }
 
+function parseDate(ddmmyyyy) {
+    const day = ddmmyyyy.slice(0, 2);
+    const month = ddmmyyyy.slice(2, 4) - 1;
+    const year = ddmmyyyy.slice(4);
+    return new Date(year, month, day);
+}
+
 // Exporta apenas as licenças vigentes, onde a data final é maior ou igual à data atual
 function exportLicencasVigentes() {
     if (processedData.length === 0) {
@@ -240,17 +247,12 @@ function exportLicencasVigentes() {
 
     const today = new Date();
     let licencasVigentes = processedData.filter((row, index) => {
-        // Ignora a linha de cabeçalho
-        if (index === 0) return false;
-
-        const dataFinal = row[22]; // A coluna "data_final"
+        if (index === 0) return false; // Ignora cabeçalho
+        const dataFinal = row[16]; // A coluna "data_final" no formato "ddmmyyyy"
         if (!dataFinal) return false;
 
-        // Divide a data final e converte para um objeto Date
-        const [dia, mes, ano] = dataFinal.split('/').map(Number);
-        const dataRow = new Date(ano, mes - 1, dia);
-
-        // Compara a data da linha com a data de hoje
+        // Converte a data final para o formato Date e compara
+        const dataRow = parseDate(dataFinal);
         return dataRow >= today;
     });
 
@@ -259,7 +261,7 @@ function exportLicencasVigentes() {
         return;
     }
 
-    // Adiciona os cabeçalhos ao início do array licencasVigentes
+    // Adiciona cabeçalho
     licencasVigentes.unshift(processedData[0]);
 
     let ws = XLSX.utils.aoa_to_sheet(licencasVigentes);
@@ -282,11 +284,13 @@ function exportVencidas() {
     }
 
     const today = new Date();
-    let licencasVencidas = processedData.filter(row => {
-        const dataFinal = row[22];
+    let licencasVencidas = processedData.filter((row, index) => {
+        if (index === 0) return false; // Ignora cabeçalho
+        const dataFinal = row[16]; // A coluna "data_final" no formato "ddmmyyyy"
         if (!dataFinal) return false;
-        const [dia, mes, ano] = dataFinal.split('/').map(Number);
-        const dataRow = new Date(ano, mes - 1, dia);
+
+        // Converte a data final para o formato Date e compara
+        const dataRow = parseDate(dataFinal);
         return dataRow < today;
     });
 
@@ -295,7 +299,7 @@ function exportVencidas() {
         return;
     }
 
-    // Adiciona os cabeçalhos à licencasVencidas
+    // Adiciona cabeçalho
     licencasVencidas.unshift(processedData[0]);
 
     let ws = XLSX.utils.aoa_to_sheet(licencasVencidas);
