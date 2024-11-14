@@ -37,17 +37,17 @@ function processAndPreviewData() {
 
     processedData = [];
 
-    // Adiciona cabeçalhos apenas uma vez
+    // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_letivo"
     processedData.push([
         "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
         "cidade", "telefone", "data_exame", "numero", "dias_licenca",
-        "data_inicio", "data_fim", "cid", "tipo", "motivo", "data_final",
-        "reexaminar", "reassumir", "prorrogacao"
+        "data_inicio", "data_fim", "ano_letivo", "cid", "tipo", "motivo",
+        "data_final", "reexaminar", "reassumir", "prorrogacao"
     ]);
 
     // Processa cada entrada separadamente
     entries.forEach(entry => {
-        let row = new Array(19).fill("");
+        let row = new Array(20).fill("");
 
         // Extrai o nome do servidor
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
@@ -66,10 +66,9 @@ function processAndPreviewData() {
         row[6] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
         row[7] = normalizeString(entry).match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
-        // Extrai a data do laudo e combina em um formato "ddmmyyyy"
+        // Extrai a data do laudo e combina em um formato único "data_exame" no formato "ddmmyyyy"
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (dataLaudoMatch) {
-            // Combina dia, mês e ano em um único campo "data_exame" no formato "ddmmyyyy"
             row[8] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
         }
 
@@ -87,21 +86,24 @@ function processAndPreviewData() {
             row[11] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`;
             // Combina dia, mês e ano de fim em "data_fim" no formato "ddmmyyyy"
             row[12] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`;
+
+            // Extrai o ano da data_fim e armazena em "ano_letivo"
+            row[13] = periodoMatch[7]; // ano_fim
         }
 
         // Extrai o CID
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-        row[13] = cidMatch ? cidMatch[1].trim() : "";
+        row[14] = cidMatch ? cidMatch[1].trim() : "";
 
         // Define o Tipo de Licença e o Motivo
-        row[14] = 5; // Tipo fixo como 5
-        row[15] = (row[13] === "Z39.2") ? 4 : (row[13] === "Z76.3") ? 24 : 1;
+        row[15] = 5; // Tipo fixo como 5
+        row[16] = (row[14] === "Z39.2") ? 4 : (row[14] === "Z76.3") ? 24 : 1;
 
         // Data Final, Reexaminar, Reassumir, e Prorrogação
-        row[16] = row[12]; // Usa data_fim como data_final
-        row[17] = "S";
+        row[17] = row[12]; // Usa data_fim como data_final
         row[18] = "S";
-        row[19] = "N";
+        row[19] = "S";
+        row[20] = "N";
 
         // Adiciona a linha de dados processada
         processedData.push(row);
@@ -118,6 +120,7 @@ function processAndPreviewData() {
     // Atualiza o nome do arquivo
     updateFilename();
 }
+
 
 // Atualiza a pré-visualização dos dados em uma tabela HTML
 function updatePreview() {
