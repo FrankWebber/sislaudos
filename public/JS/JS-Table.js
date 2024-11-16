@@ -58,7 +58,7 @@ function processAndPreviewData() {
             row[3] = matriculaMatch[3] || "";                  // letra
 
             // Adiciona o traço antes do antepenúltimo dígito
-            let matriculaCompleta = `${row[1]}${row[2]}${row[3]}`;
+            let matriculaCompleta = `01${row[1]}${row[2]}${row[3]}`;
             row[4] = `${matriculaCompleta.slice(0, -2)}-${matriculaCompleta.slice(-2)}`;
         }
 
