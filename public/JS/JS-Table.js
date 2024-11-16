@@ -38,79 +38,78 @@ function processAndPreviewData() {
 
     // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_letivo" e "código_especial"
     processedData.push([
-        "servidor", "matricula", "digito", "letra", "lotacao", "cargo",
+        "servidor", "matricula", "digito", "letra", "matricula_completa", "lotacao", "cargo",
         "cidade", "telefone", "data_exame", "numero", "dias_licenca",
         "data_inicio", "data_fim", "ano_letivo", "cid", "tipo", "motivo",
         "data_final", "reexaminar", "reassumir", "prorrogacao", "codigo_cid"
     ]);
 
     entries.forEach(entry => {
-        let row = new Array(21).fill("");
+        let row = new Array(23).fill(""); // Atualizado para 23 colunas
 
         // Extrai o nome do servidor
         row[0] = normalizeString(entry).match(/servidor\(a\)\s+(.+?)(?=\s+CPF:|\s+publico,)/)?.[1]?.trim() || "";
 
-        // Extrai a matrícula, dígito e letra
+        // Extrai a matrícula, dígito, letra e cria matricula_completa com traço antes do antepenúltimo dígito
         let matriculaMatch = normalizeString(entry).match(/matricula\s*n°?\s*(\d{1,3}(?:\.\d{3})*)-(\d)([A-Za-z])?/);
         if (matriculaMatch) {
-            row[1] = matriculaMatch[1].replace(/\./g, "") || "";
-            row[2] = matriculaMatch[2] || "";
-            row[3] = matriculaMatch[3] || "";
+            row[1] = matriculaMatch[1].replace(/\./g, "") || ""; // matricula
+            row[2] = matriculaMatch[2] || "";                  // digito
+            row[3] = matriculaMatch[3] || "";                  // letra
+
+            // Adiciona o traço antes do antepenúltimo dígito
+            let matriculaCompleta = `${row[1]}${row[2]}${row[3]}`;
+            row[4] = `${matriculaCompleta.slice(0, -2)}-${matriculaCompleta.slice(-2)}`;
         }
 
-        // Extrai unidade, cargo, cidade e telefone
-        row[4] = normalizeString(entry).match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[5] = normalizeString(entry).match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
-        row[6] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
-        row[7] = normalizeString(entry).match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
 
-        // Extrai a data do laudo e combina em um formato único "data_exame" no formato "ddmmyyyy"
+        // Outras extrações permanecem as mesmas...
+        row[5] = normalizeString(entry).match(/unidade:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+        row[6] = normalizeString(entry).match(/Cargo de:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+        row[7] = normalizeString(entry).match(/cidade:\s+(.+?)(?=\/|\n)/)?.[1]?.trim() || "";
+        row[8] = normalizeString(entry).match(/telefone:\s+(.+?)(?=\n)/)?.[1]?.trim() || "";
+
         let dataLaudoMatch = entry.match(/Data\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (dataLaudoMatch) {
-            row[8] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
+            row[9] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
         }
 
-        // Extrai o número do laudo médico
         let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
         if (laudoMatch) {
-            row[9] = laudoMatch[1];
+            row[10] = laudoMatch[1];
         }
 
-        // Extrai o período de licença e combina as datas de início e fim no formato "ddmmyyyy"
         let periodoMatch = entry.match(/Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/);
         if (periodoMatch) {
-            row[10] = periodoMatch[1]; // dias_licenca
-            row[11] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`; // data_inicio
-            row[12] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`; // data_fim
-            row[13] = periodoMatch[7]; // ano_letivo
+            row[11] = periodoMatch[1]; // dias_licenca
+            row[12] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`; // data_inicio
+            row[13] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`; // data_fim
+            row[14] = periodoMatch[7]; // ano_letivo
         }
 
-        // Extrai o CID
         let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-        row[14] = cidMatch ? cidMatch[1].trim() : "";
+        row[15] = cidMatch ? cidMatch[1].trim() : "";
 
-        // Define o Tipo de Licença e o Motivo
-        row[15] = 5; // Tipo fixo como 5
-        row[16] = (row[14] === "Z39.2") ? 4 : (row[14] === "Z76.3") ? 24 : 1;
+        row[16] = 5; // Tipo fixo como 5
+        row[17] = (row[15] === "Z39.2") ? 4 : (row[15] === "Z76.3") ? 24 : 1;
 
-        // Data Final, Reexaminar, Reassumir, e Prorrogação
-        row[17] = row[12]; // Usa data_fim como data_final
-        row[18] = "S";
+        row[18] = row[13]; // Usa data_fim como data_final
         row[19] = "S";
-        row[20] = "N";
+        row[20] = "S";
+        row[21] = "N";
 
-        // Condição para definir o "código_especial"
-        if (row[14] === "Z76.3") {
-            row[21] = "14012";
-        } else if (row[14] === "Z39.2") {
-            row[21] = "13734";
+        if (row[15] === "Z76.3") {
+            row[22] = "14012";
+        } else if (row[15] === "Z39.2") {
+            row[22] = "13734";
         } else {
-            row[21] = "1";
+            row[22] = "1";
         }
 
         // Adiciona a linha de dados processada
         processedData.push(row);
     });
+
 
     // Atualiza a pré-visualização
     updatePreview();
