@@ -282,11 +282,11 @@ function exportLicencasVigentes() {
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vigentes");
 
-    const filename = `Licencas_Vigentes_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    const filename = `Licencas_Vigentes.xlsx`;
     XLSX.writeFile(wb, filename);
 
     let status = document.getElementById('status');
-    status.textContent = "Arquivo Excel para licenças vigentes exportado com sucesso!";
+    status.textContent = "Arquivo Excel para licenças vigentes exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
     status.className = 'success';
 }
 
@@ -320,11 +320,11 @@ function exportVencidas() {
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vencidas");
 
-    const filename = `Licencas_Vencidas_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    const filename = `Licencas_Vencidas.xlsx`;
     XLSX.writeFile(wb, filename);
 
     let status = document.getElementById('status');
-    status.textContent = "Arquivo Excel para licenças vencidas exportado com sucesso!";
+    status.textContent = "Arquivo Excel para licenças vencidas exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
     status.className = 'success';
 }
 
