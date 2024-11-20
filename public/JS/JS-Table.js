@@ -283,21 +283,13 @@ function exportLicencasVigentes() {
     XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vigentes");
 
     const filename = `Licencas_Vigentes.xlsx`;
-    const data = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-    // Cria um link de download e força o navegador a sobrescrever o arquivo existente
-    const blob = new Blob([data], { type: 'application/octet-stream' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    XLSX.writeFile(wb, filename);
 
     let status = document.getElementById('status');
     status.textContent = "Arquivo Excel para licenças vigentes exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
     status.className = 'success';
 }
+
 // Exporta apenas as licenças vencidas, onde a data final é menor que a data atual
 function exportVencidas() {
     if (processedData.length === 0) {
@@ -329,16 +321,7 @@ function exportVencidas() {
     XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vencidas");
 
     const filename = `Licencas_Vencidas.xlsx`;
-    const data = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-    // Cria um link de download e força o navegador a sobrescrever o arquivo existente
-    const blob = new Blob([data], { type: 'application/octet-stream' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    XLSX.writeFile(wb, filename);
 
     let status = document.getElementById('status');
     status.textContent = "Arquivo Excel para licenças vencidas exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
