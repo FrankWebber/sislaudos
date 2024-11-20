@@ -1,28 +1,28 @@
 * {
-    box-sizing: border-box;
-    font-size: 14pt;
+  box-sizing: border-box;
+  font-size: 14pt;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    /* Azul escuro */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ECF0F1;
-    /* Cinza claro */
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  /* Azul escuro */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ecf0f1;
+  /* Cinza claro */
 }
 
 h3 {
-    text-align: center;
-    color: #242525;
-    /* Azul vibrante */
+  text-align: center;
+  color: #242525;
+  /* Azul vibrante */
 }
 
 .tutorial {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 
 .step-1,
@@ -31,15 +31,15 @@ h3 {
 .step-4,
 .step-5,
 .step-6 {
-    background-color: #EAF2F8;
-    /* Azul muito claro */
-    border: 1px solid #BDC3C7;
-    /* Cinza suave */
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    border-radius: 5px;
-    padding: 20px;
-    transition: transform 0.3s ease;
+  background-color: #eaf2f8;
+  /* Azul muito claro */
+  border: 1px solid #bdc3c7;
+  /* Cinza suave */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  border-radius: 5px;
+  padding: 20px;
+  transition: transform 0.3s ease;
 }
 
 .step-1:hover,
@@ -48,123 +48,126 @@ h3 {
 .step-4:hover,
 .step-5:hover,
 .step-6:hover {
-    transform: scale(1.02);
-    border-color: #2980B9;
-    /* Azul vibrante */
+  transform: scale(1.02);
+  border-color: #2980b9;
+  /* Azul vibrante */
 }
 
 #security {
-    border-color: #E74C3C;
-    /* Vermelho suave */
+  border-color: #e74c3c;
+  /* Vermelho suave */
 }
 
 li {
-    margin: 8px 0;
-    font-size: 14pt;
+  margin: 8px 0;
+  font-size: 14pt;
 }
 
 a {
-    text-decoration: none;
-    color: #3498DB;
-    /* Azul médio */
+  text-decoration: none;
+  color: #3498db;
+  /* Azul médio */
 }
 
 a:hover {
-    text-decoration: underline;
-    color: #1A5276;
-    /* Azul mais escuro */
+  text-decoration: underline;
+  color: #1a5276;
+  /* Azul mais escuro */
 }
 
 .checkbox {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .ok {
-    margin-left: 10px;
-    width: 22px;
-    height: 22px;
+  margin-left: 10px;
+  width: 22px;
+  height: 22px;
 }
 
 .container-resources {
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 footer {
-    width: 100%;
-    background-color: #345777;
-    /* Azul vibrante */
-    color: #FFFFFF;
-    /* Texto branco */
-    padding: 20px 40px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  width: 100%; /* Garante que o footer ocupe 100% da largura */
+  background-color: #345777;
+  color: #333;
+  padding: 20px 0;
+  box-sizing: border-box; /* Inclui padding no cálculo da largura */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1000px; /* Limita o conteúdo interno */
+  margin: 0 auto;
 }
 
 .footer-section {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .footer-section h4 {
-    margin: 0 0 10px;
+  margin: 0 0 10px;
 }
 
 .footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-section ul li {
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
-    /* Alinha o texto ao centro verticalmente com a imagem */
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  /* Alinha o texto ao centro verticalmente com a imagem */
 }
 
 .footer-section ul li img {
-    width: 20px;
-    /* Ajusta o tamanho da imagem conforme necessário */
-    margin-right: 8px;
-    /* Espaço entre a imagem e o texto */
-    vertical-align: middle;
+  width: 20px;
+  /* Ajusta o tamanho da imagem conforme necessário */
+  margin-right: 8px;
+  /* Espaço entre a imagem e o texto */
+  vertical-align: middle;
 }
 
 .footer-section ul li a {
-    color: #ddd;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    /* Alinha o texto com a imagem dentro do link */
+  color: #ddd;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  /* Alinha o texto com a imagem dentro do link */
 }
 
 .footer-section ul li a:hover {
-    color: #fff;
+  color: #fff;
 }
 
-
 .footer-bottom {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 14px;
-    color: #D5DBDB;
-    /* Cinza claro */
-    margin-top: 20px;
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 14px;
+  color: #d5dbdb;
+  /* Cinza claro */
+  margin-top: 20px;
 }
 
 img {
-    width: 2rem;
+  width: 2rem;
 }
 
 .linkAWS {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

@@ -1,202 +1,201 @@
 /* Estilos do corpo e container */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1,
 h2 {
-    text-align: center;
-    color: #333;
+  text-align: center;
+  color: #333;
 }
 
 /* Estilos para textarea e inputs */
 textarea,
 input[type="text"],
 input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
 textarea {
-    border: 1px solid #007bff;
-    transition: border 0.3s;
+  border: 1px solid #007bff;
+  transition: border 0.3s;
 }
 
 textarea:focus {
-    border-color: #0056b3;
+  border-color: #0056b3;
 }
 
 .button-group {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* Define uma única coluna centralizada */
-    grid-template-rows: auto auto auto auto;
-    /* Quatro linhas para os botões */
-    gap: 10px;
-    justify-items: center;
-    /* Centraliza os itens horizontalmente */
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Define uma única coluna centralizada */
+  grid-template-rows: auto auto auto auto;
+  /* Quatro linhas para os botões */
+  gap: 10px;
+  justify-items: center;
+  /* Centraliza os itens horizontalmente */
+  align-items: center;
 }
 
 .correct-preview {
-    display: flex;
-    gap: 10px;
-    /* Espaço entre os botões dentro da div */
+  display: flex;
+  gap: 10px;
+  /* Espaço entre os botões dentro da div */
 }
 
 .Todos,
 .Regiao,
 .vigente-vencida {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
 }
 
 .btn-tds {
-    width: 10rem;
-    padding: 20px;
+  width: 10rem;
+  padding: 20px;
 }
 
-.Regiao>button {
-    width: 15em;
-    padding: 20px;
+.Regiao > button {
+  width: 15em;
+  padding: 20px;
 }
 
-.vigente-vencida>button {
-    width: 15rem;
-    padding: 20px;
+.vigente-vencida > button {
+  width: 15rem;
+  padding: 20px;
 }
-
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
-
-
-
 
 /* Estilos para a tabela de preview */
 #dataPreview {
-    margin-top: 20px;
-    overflow-x: auto;
+  margin-top: 20px;
+  overflow-x: auto;
 }
 
 .preview-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .preview-table th,
 .preview-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    font-size: 14px;
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
 }
 
 .preview-table th {
-    background-color: #f2f2f2;
-    text-align: left;
+  background-color: #f2f2f2;
+  text-align: left;
 }
 
 #status {
-    margin-top: 20px;
-    font-weight: bold;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .success {
-    color: green;
+  color: green;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 /* Estilos para o footer */
+
 footer {
-    background-color: #f1f1f1;
-    color: #333;
-    padding: 20px 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .footer-section {
-    flex: 1;
-    margin: 10px;
-    min-width: 200px;
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
 }
 
 .footer-section h4 {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #007bff;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #007bff;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
 }
 
 .footer-section p,
 .footer-section li {
-    font-size: 12px;
-    line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .footer-bottom {
-    text-align: center;
-    padding-top: 10px;
-    font-size: 12px;
-    border-top: 1px solid #ccc;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 12px;
+  border-top: 1px solid #ccc;
 }
 
 .link-tutorial {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.link-tutorial>a {
-    font-size: 16pt;
-    text-decoration: none;
-    color: rgb(84, 139, 184);
+.link-tutorial > a {
+  font-size: 16pt;
+  text-decoration: none;
+  color: rgb(84, 139, 184);
 }
 
-.link-tutorial>a:hover {
-    font-size: 16pt;
-    text-decoration: underline;
-    color: rgb(84, 139, 184);
+.link-tutorial > a:hover {
+  font-size: 16pt;
+  text-decoration: underline;
+  color: rgb(84, 139, 184);
 }
 
 .btn_correctText {
-    background-color: #00a093;
+  background-color: #00a093;
 }
