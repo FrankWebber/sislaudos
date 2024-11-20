@@ -96,19 +96,15 @@ a:hover {
 }
 
 footer {
-  width: 100%; /* Garante que o footer ocupe 100% da largura */
+  width: 100%;
   background-color: #345777;
-  color: #333;
-  padding: 20px 0;
-  box-sizing: border-box; /* Inclui padding no cálculo da largura */
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 1000px; /* Limita o conteúdo interno */
-  margin: 0 auto;
+  /* Azul vibrante */
+  color: #ffffff;
+  /* Texto branco */
+  padding: 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .footer-section {
