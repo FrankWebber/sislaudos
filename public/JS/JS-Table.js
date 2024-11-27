@@ -38,7 +38,7 @@ function processAndPreviewData() {
 
   processedData = [];
 
-  // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_letivo" e "código_especial"
+  // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_fim"
   processedData.push([
     "servidor",
     "matricula",
@@ -54,7 +54,8 @@ function processAndPreviewData() {
     "dias_licenca",
     "data_inicio",
     "data_fim",
-    "ano_inicio", // Adiciona o novo cabeçalho
+    "ano_inicio",
+    "data_fim_formatada", // Novo cabeçalho adicionado
     "cid",
     "tipo",
     "motivo",
@@ -66,7 +67,7 @@ function processAndPreviewData() {
   ]);
 
   entries.forEach((entry) => {
-    let row = new Array(23).fill(""); // Atualizado para 23 colunas
+    let row = new Array(24).fill(""); // Atualizado para 24 colunas
 
     // Extrai o nome do servidor
     row[0] =
@@ -128,6 +129,7 @@ function processAndPreviewData() {
       row[10] = laudoMatch[1]; // Captura apenas o número antes da barra
     }
 
+    // Captura o período e preenche "data_fim" e "data_fim_formatada"
     let periodoMatch = entry.match(
       /Por\s+(\d+)\s+dias\s+(\d{2})\/(\d{2})\/(\d{4})\s+(?:à|a)\s+(\d{2})\/(\d{2})\/(\d{4})/
     );
@@ -138,25 +140,31 @@ function processAndPreviewData() {
 
       // Atualiza "ano_inicio" com base nos últimos 4 dígitos de "data_inicio"
       row[14] = periodoMatch[4]; // Extrai diretamente o ano da data_inicio
+
+      // Preenche "data_fim_formatada" com data no formato dd/mm/yyyy
+      row[15] = `${periodoMatch[7]}-${periodoMatch[6].padStart(
+        2,
+        "0"
+      )}-${periodoMatch[5].padStart(2, "0")}`;
     }
 
     let cidMatch = entry.match(/CID\s+([\w., ]+)/);
-    row[15] = cidMatch ? cidMatch[1].trim() : "";
+    row[16] = cidMatch ? cidMatch[1].trim() : "";
 
-    row[16] = 5; // Tipo fixo como 5
-    row[17] = row[15] === "Z39.2" ? 4 : row[15] === "Z76.3" ? 24 : 1;
+    row[17] = 5; // Tipo fixo como 5
+    row[18] = row[16] === "Z39.2" ? 4 : row[16] === "Z76.3" ? 24 : 1;
 
-    row[18] = row[13]; // Usa data_fim como data_final
-    row[19] = "S";
+    row[19] = row[13]; // Usa data_fim como data_final
     row[20] = "S";
-    row[21] = "N";
+    row[21] = "S";
+    row[22] = "N";
 
-    if (row[15] === "Z76.3") {
-      row[22] = "14012";
-    } else if (row[15] === "Z39.2") {
-      row[22] = "13734";
+    if (row[16] === "Z76.3") {
+      row[23] = "14012";
+    } else if (row[16] === "Z39.2") {
+      row[23] = "13734";
     } else {
-      row[22] = "1";
+      row[23] = "1";
     }
 
     // Adiciona a linha de dados processada
@@ -326,18 +334,17 @@ function exportLicencasVigentes() {
   }
 
   const today = new Date();
-  const currentYear = today.getFullYear();
+  const headerIndex = processedData[0].indexOf("data_fim_formatada");
+  if (headerIndex === -1) {
+    alert("Cabeçalho 'data_fim_formatada' não encontrado.");
+    return;
+  }
 
+  // Filtra as linhas com data_fim_formatada >= hoje
   let licencasVigentes = processedData.filter((row, index) => {
     if (index === 0) return false; // Ignora cabeçalho
-    const dataFim = row[13]; // A coluna "data_fim" no formato "ddmmyyyy"
-    if (!dataFim || dataFim.length !== 8) return false; // Verifica se o formato está correto
-
-    // Extrai o ano de "data_fim" (últimos 4 dígitos)
-    const anoFim = parseInt(dataFim.slice(-4), 10);
-
-    // Retorna verdadeiro se o ano_fim for maior ou igual ao ano atual
-    return anoFim >= currentYear;
+    const dataFim = new Date(row[headerIndex]); // Cria um objeto Date a partir de data_fim_formatada
+    return dataFim >= today; // Verifica se a data é igual ou maior que hoje
   });
 
   if (licencasVigentes.length === 0) {
@@ -345,19 +352,18 @@ function exportLicencasVigentes() {
     return;
   }
 
-  // Adiciona cabeçalho
-  licencasVigentes.unshift(processedData[0]);
+  licencasVigentes.unshift(processedData[0]); // Adiciona cabeçalho
 
   let ws = XLSX.utils.aoa_to_sheet(licencasVigentes);
   let wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vigentes");
 
-  const filename = `Licencas_Vigentes.xlsx`;
+  const filename = "Licencas_Vigentes.xlsx"; // Nome fixo do arquivo
   XLSX.writeFile(wb, filename);
 
   let status = document.getElementById("status");
   status.textContent =
-    "Arquivo Excel para licenças vigentes exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
+    "Arquivo Excel para licenças vigentes exportado com sucesso!";
   status.className = "success";
 }
 
@@ -371,14 +377,17 @@ function exportVencidas() {
   }
 
   const today = new Date();
+  const headerIndex = processedData[0].indexOf("data_fim_formatada");
+  if (headerIndex === -1) {
+    alert("Cabeçalho 'data_fim_formatada' não encontrado.");
+    return;
+  }
+
+  // Filtra as linhas com data_fim_formatada < hoje
   let licencasVencidas = processedData.filter((row, index) => {
     if (index === 0) return false; // Ignora cabeçalho
-    const dataFinal = row[16]; // A coluna "data_final" no formato "ddmmyyyy"
-    if (!dataFinal) return false;
-
-    // Converte a data final para o formato Date e compara
-    const dataRow = parseDate(dataFinal);
-    return dataRow < today;
+    const dataFim = new Date(row[headerIndex]); // Cria um objeto Date a partir de data_fim_formatada
+    return dataFim < today; // Verifica se a data é menor que hoje
   });
 
   if (licencasVencidas.length === 0) {
@@ -386,19 +395,18 @@ function exportVencidas() {
     return;
   }
 
-  // Adiciona cabeçalho
-  licencasVencidas.unshift(processedData[0]);
+  licencasVencidas.unshift(processedData[0]); // Adiciona cabeçalho
 
   let ws = XLSX.utils.aoa_to_sheet(licencasVencidas);
   let wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Licencas_Vencidas");
 
-  const filename = `Licencas_Vencidas.xlsx`;
+  const filename = "Licencas_Vencidas.xlsx"; // Nome fixo do arquivo
   XLSX.writeFile(wb, filename);
 
   let status = document.getElementById("status");
   status.textContent =
-    "Arquivo Excel para licenças vencidas exportado com sucesso! Por favor, salve o arquivo dentro da pasta 'planilhas' do programa LancerProcess.";
+    "Arquivo Excel para licenças vencidas exportado com sucesso!";
   status.className = "success";
 }
 
