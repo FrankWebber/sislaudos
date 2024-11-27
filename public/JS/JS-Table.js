@@ -54,7 +54,7 @@ function processAndPreviewData() {
     "dias_licenca",
     "data_inicio",
     "data_fim",
-    "ano_letivo",
+    "ano_inicio", // Adiciona o novo cabeçalho
     "cid",
     "tipo",
     "motivo",
@@ -113,9 +113,19 @@ function processAndPreviewData() {
       row[9] = `${dataLaudoMatch[1]}${dataLaudoMatch[2]}${dataLaudoMatch[3]}`;
     }
 
-    let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)/);
+    // Captura a data_inicio e gera o ano_inicio
+    let dataInicioMatch = entry.match(/Data do exame\s*(\d{2}\/\d{2}\/\d{4})/);
+    if (dataInicioMatch) {
+      row[12] = dataInicioMatch[1]; // Mantém a data completa como data_inicio
+      let anoMatch = dataInicioMatch[1].match(/\d{4}$/); // Extrai os últimos 4 dígitos (ano)
+      if (anoMatch) {
+        row[14] = anoMatch[0]; // Preenche o ano_inicio
+      }
+    }
+
+    let laudoMatch = entry.match(/LAUDO MÉDICO N°\s+(\d+)\//);
     if (laudoMatch) {
-      row[10] = laudoMatch[1];
+      row[10] = laudoMatch[1]; // Captura apenas o número antes da barra
     }
 
     let periodoMatch = entry.match(
