@@ -326,14 +326,18 @@ function exportLicencasVigentes() {
   }
 
   const today = new Date();
+  const currentYear = today.getFullYear();
+
   let licencasVigentes = processedData.filter((row, index) => {
     if (index === 0) return false; // Ignora cabeçalho
-    const dataFinal = row[16]; // A coluna "data_final" no formato "ddmmyyyy"
-    if (!dataFinal) return false;
+    const dataFim = row[13]; // A coluna "data_fim" no formato "ddmmyyyy"
+    if (!dataFim || dataFim.length !== 8) return false; // Verifica se o formato está correto
 
-    // Converte a data final para o formato Date e compara
-    const dataRow = parseDate(dataFinal);
-    return dataRow >= today;
+    // Extrai o ano de "data_fim" (últimos 4 dígitos)
+    const anoFim = parseInt(dataFim.slice(-4), 10);
+
+    // Retorna verdadeiro se o ano_fim for maior ou igual ao ano atual
+    return anoFim >= currentYear;
   });
 
   if (licencasVigentes.length === 0) {
