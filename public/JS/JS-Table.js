@@ -135,7 +135,9 @@ function processAndPreviewData() {
       row[11] = periodoMatch[1]; // dias_licenca
       row[12] = `${periodoMatch[2]}${periodoMatch[3]}${periodoMatch[4]}`; // data_inicio
       row[13] = `${periodoMatch[5]}${periodoMatch[6]}${periodoMatch[7]}`; // data_fim
-      row[14] = periodoMatch[7]; // ano_letivo
+
+      // Atualiza "ano_inicio" com base nos últimos 4 dígitos de "data_inicio"
+      row[14] = periodoMatch[4]; // Extrai diretamente o ano da data_inicio
     }
 
     let cidMatch = entry.match(/CID\s+([\w., ]+)/);
