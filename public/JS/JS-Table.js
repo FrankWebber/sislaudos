@@ -32,11 +32,17 @@ function normalizeString(str) {
 
 function processAndPreviewData() {
   let rawData = document.getElementById("dataInput").value;
+  
+  // Normaliza e divide os dados
+  rawData = normalizeString(rawData);
   let entries = rawData.split(
-    /(?=GOVERNO DO ESTADO DO\s+AMAZONAS\s+JUNTA MÉDICA - PERICIAL DO ESTADO)/
+    /(?=GOVERNO DO ESTADO.*?JUNTA MÉDICA - PERICIAL DO ESTADO)/i
   );
 
+  console.log(`Número de registros detectados: ${entries.length}`); // Depuração
+
   processedData = [];
+
 
   // Adiciona cabeçalhos, incluindo o novo cabeçalho "ano_fim"
   processedData.push([
